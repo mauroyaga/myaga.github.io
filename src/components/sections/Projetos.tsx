@@ -96,7 +96,7 @@ export function Projetos() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-zinc-500 max-w-[520px]"
           >
-            Cada solução foi feita para ser usada, não apenas demonstrada.
+            Cada solução foi feita a partir de demandas reais, buscando antes de tudo entender o problema.
           </motion.p>
         </div>
 
