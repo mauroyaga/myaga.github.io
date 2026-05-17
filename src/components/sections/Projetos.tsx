@@ -119,7 +119,7 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
       className={[
-        'group relative flex flex-col rounded-2xl bg-[#131316] border border-white/8 overflow-hidden',
+        'group relative flex flex-col h-full rounded-2xl bg-[#131316] border border-white/8 overflow-hidden',
         'transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:-translate-y-1 hover:border-white/15',
         projeto.emBreve ? 'opacity-60' : '',
       ].join(' ')}
@@ -180,5 +180,5 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
 
   if (projeto.emBreve) return conteudo
 
-  return <Link to={projeto.rota}>{conteudo}</Link>
+  return <Link to={projeto.rota} className="flex flex-col">{conteudo}</Link>
 }
