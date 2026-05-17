@@ -65,7 +65,7 @@ export function Sobre() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="mt-8 flex flex-wrap gap-3"
             >
-              {['12 anos em tintas', '8 anos em laboratório', 'CRQ ativo', 'ADS'].map(tag => (
+              {['12 anos em tintas', '8 anos em laboratório', 'Técnico em Química', 'Analista de Sistemas'].map(tag => (
                 <span
                   key={tag}
                   className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-[12px] font-medium text-zinc-400"
