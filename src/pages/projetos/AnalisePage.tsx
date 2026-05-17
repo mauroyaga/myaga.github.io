@@ -64,7 +64,7 @@ function HeroAnalise() {
 // ─── NARRATIVA ───────────────────────────────────────────────────────────────
 function NarrativaAnalise() {
   const dores = [
-    'Resultados registrados em papel ou planilhas isoladas — sem busca, sem histórico comparativo entre lotes',
+    'Resultados registrados em planilhas que vão crescendo, tornando difícil o acesso e o comparativo de dados entre lotes',
     'Cálculos de desvio feitos manualmente criam margem de erro em análises críticas de qualidade',
     'Sem rastreabilidade: quem aprovou, quando, com qual nota — não fica registrado de forma confiável',
     'Histórico de um produto exige garimpar arquivos físicos ou planilhas espalhadas entre analistas',
