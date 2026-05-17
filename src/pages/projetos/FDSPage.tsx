@@ -62,17 +62,6 @@ function HeroFDS() {
 
 // ─── NARRATIVA ───────────────────────────────────────────────────────────────
 function NarrativaFDS() {
-  const secoes16 = [
-    { n: 1, nome: 'Identificação do produto', ok: true },
-    { n: 2, nome: 'Identificação de perigos', ok: true },
-    { n: 3, nome: 'Composição e informações', status: 'desatualizado' },
-    { n: 4, nome: 'Primeiros socorros', status: 'desatualizado' },
-    { n: 5, nome: 'Combate a incêndio', status: 'em branco' },
-    { n: 6, nome: 'Derramamento e vazamento', status: 'em branco' },
-    { n: 7, nome: 'Manuseio e armazenamento', status: 'em branco' },
-    { n: 8, nome: 'Controles de exposição', status: 'em branco' },
-  ]
-
   const dores = [
     'NBR 14725:2023 exige 16 seções obrigatórias com precisão técnica e linguagem normativa',
     'Classificação GHS envolve pictogramas, frases H e P específicos para cada produto',
@@ -125,35 +114,114 @@ function NarrativaFDS() {
           <motion.div
             initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl bg-[#1c1c22] border border-white/8 p-6"
+            className="rounded-2xl border border-white/8 overflow-hidden"
           >
-            <p className="text-[11px] text-zinc-600 uppercase tracking-widest mb-4">FDS sem sistema — situação comum</p>
-            <div className="space-y-2">
-              {secoes16.map((s) => (
-                <div key={s.n} className="flex items-center gap-3 p-2.5 rounded-lg bg-white/5 border border-white/5">
-                  <span className="text-[10px] text-zinc-700 w-4 flex-shrink-0">{s.n}</span>
-                  <div className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 ${
-                    s.ok ? 'bg-[#34d399]/15' : s.status === 'desatualizado' ? 'bg-[#fbbf24]/10' : 'bg-[#fb7185]/10'
-                  }`}>
-                    {s.ok
-                      ? <Check className="w-2.5 h-2.5 text-[#34d399]" />
-                      : <span className="text-[8px] text-zinc-600">—</span>
-                    }
-                  </div>
-                  <span className="text-xs text-zinc-500 flex-1 min-w-0 truncate">{s.nome}</span>
-                  {s.status && (
-                    <span className={`text-[10px] flex-shrink-0 ${
-                      s.status === 'desatualizado' ? 'text-[#fbbf24]/60' : 'text-[#fb7185]/60'
-                    }`}>{s.status}</span>
-                  )}
-                </div>
-              ))}
-              <p className="text-xs text-zinc-700 mt-3 italic pl-1">...mais 8 seções obrigatórias</p>
-            </div>
+            <WordDocFDS />
           </motion.div>
         </div>
       </div>
     </section>
+  )
+}
+
+// ─── WORD DOC MOCKUP ─────────────────────────────────────────────────────────
+function WordDocFDS() {
+  return (
+    <div className="bg-white text-[#1e293b] text-[11px] font-sans select-none">
+      {/* Barra de título Word */}
+      <div className="bg-[#2b579a] px-3 py-1.5 flex items-center gap-2">
+        <div className="flex gap-1">
+          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+        </div>
+        <span className="text-[10px] text-white/85 flex-1 text-center">
+          FDS_Tinta_Acrilica_Premium_v3_FINAL_2.docx — Microsoft Word
+        </span>
+      </div>
+
+      {/* Ribbon */}
+      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4">
+        {['Arquivo', 'Página Inicial', 'Inserir', 'Layout', 'Revisão'].map(m => (
+          <span key={m} className="text-[10px] text-gray-500">{m}</span>
+        ))}
+        <span className="ml-auto text-[10px] text-[#e8a838] font-semibold">● 3 alterações controladas</span>
+      </div>
+
+      {/* Régua */}
+      <div className="bg-[#e9e9e9] border-b border-gray-300 h-3" />
+
+      {/* Corpo do documento */}
+      <div className="bg-[#c8c8c8] px-4 py-3">
+        <div className="bg-white shadow-sm px-8 py-5 space-y-3 max-h-[340px] overflow-hidden">
+
+          {/* Título */}
+          <div className="text-center space-y-0.5 mb-3">
+            <p className="font-bold text-[13px] tracking-wide uppercase">Ficha de Dados de Segurança</p>
+            <p className="text-[10px] text-gray-500">Conforme ABNT NBR 14725 — GHS Revisão 6</p>
+            <p className="text-[9px] text-red-600 font-semibold mt-1">
+              ⚠ Atenção: verificar atualização para NBR 14725:2023 / GHS Rev. 8
+            </p>
+          </div>
+
+          <div className="border-t border-gray-300 pt-2 space-y-0.5 text-[10px] text-gray-500">
+            <div className="flex gap-4">
+              <span>Versão: <span className="text-gray-700">03</span></span>
+              <span>Data de emissão: <span className="text-gray-700">12/03/2023</span></span>
+              <span className="text-[#e8a838] font-semibold">[atualizar data]</span>
+            </div>
+            <p>Produto: <span className="text-gray-800 font-medium">Tinta Acrílica Premium 18L</span></p>
+          </div>
+
+          {/* Seção 1 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              1 — Identificação do Produto e da Empresa
+            </p>
+            <div className="space-y-0.5 text-[10px] text-gray-600 leading-relaxed">
+              <p><span className="text-gray-400">Nome do produto:</span> Tinta Acrílica Premium Base Água 18L</p>
+              <p><span className="text-gray-400">Uso recomendado:</span> Tinta imobiliária para uso interno e externo em alvenaria</p>
+              <p><span className="text-gray-400">Fabricante:</span> <span className="text-gray-800">[nome da empresa]</span> <span className="text-[#e8a838]">[preencher]</span></p>
+              <p><span className="text-gray-400">Telefone emergência:</span> 0800 000 0000 <span className="text-red-500 text-[9px]">← verificar se ainda ativo</span></p>
+            </div>
+          </div>
+
+          {/* Seção 2 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              2 — Identificação de Perigos
+            </p>
+            <div className="space-y-0.5 text-[10px] leading-relaxed">
+              <p className="text-gray-600"><span className="text-gray-400">Classificação GHS:</span> Irritante — <span className="bg-yellow-100 text-yellow-800 px-1">Skin Irrit. 2; Eye Irrit. 2</span></p>
+              <p className="text-red-600 text-[9px] font-medium bg-red-50 px-1.5 py-0.5 rounded">
+                TODO: reclassificar conforme tabela GHS Rev. 8 — frases H e P precisam revisão
+              </p>
+              <p className="text-gray-500 text-[9px] italic">Pictogramas: [inserir manualmente no PDF]</p>
+            </div>
+          </div>
+
+          {/* Seção 3 parcial */}
+          <div className="pt-1 opacity-70">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              3 — Composição e Informações sobre os Ingredientes
+            </p>
+            <p className="text-[10px] text-gray-400 italic">Cópiar da FDS anterior — confirmar percentuais com P&amp;D antes de enviar</p>
+          </div>
+
+          {/* Fade out */}
+          <div className="relative h-6 pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white" />
+            <p className="absolute bottom-0 left-0 text-[9px] text-gray-300 italic">...seções 4 a 16 continuam abaixo...</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Barra de status */}
+      <div className="bg-[#2b579a] px-3 py-0.5 flex items-center justify-between">
+        <span className="text-[9px] text-white/60">Página 1 de 9</span>
+        <span className="text-[9px] text-white/60">Português (Brasil)</span>
+      </div>
+    </div>
   )
 }
 
