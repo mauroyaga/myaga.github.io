@@ -7,7 +7,7 @@ export function Sobre() {
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="sobre" ref={ref} className="bg-[#131318] py-24 md:py-32">
+    <section id="sobre" ref={ref} className="bg-[#131318] py-24 md:py-32 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="grid grid-cols-12 gap-y-8 md:gap-8 items-center">
 
