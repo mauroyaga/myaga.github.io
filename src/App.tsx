@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { FDSPage } from './pages/projetos/FDSPage'
@@ -7,7 +7,7 @@ import { DestiladorPage } from './pages/projetos/DestiladorPage'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => {
+  useLayoutEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
