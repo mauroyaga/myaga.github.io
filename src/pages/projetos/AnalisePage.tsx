@@ -148,7 +148,7 @@ const TABS = [
   { num: '02', label: 'O.F. e Pesagem' },
   { num: '03', label: 'Análise e Resultado' },
   { num: '04', label: 'Alertas automáticos' },
-  { num: '05', label: 'Parecer com IA' },
+  { num: '05', label: 'Chat com IA' },
   { num: '06', label: 'Dashboard' },
 ]
 
@@ -170,8 +170,8 @@ const TAB_INFO = [
     desc: 'Configure alertas por produto, cliente, código ou número de O.F. — o sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado. Não tem como esquecer: o alerta aparece antes de qualquer dado ser salvo.',
   },
   {
-    titulo: 'IA analisa o lote completo',
-    desc: 'Com um clique, a IA recebe todos os dados do lote — pesagem, viscosidade, PE real, temperatura, clima e desvios — e gera um parecer técnico estruturado. Ideal para análises fora do padrão ou quando o responsável precisa justificar uma decisão.',
+    titulo: 'Chat com IA especializada',
+    desc: 'IA com documentação técnica própria como referência — manuais de análise, tabelas de PE por produto e normas internas. Tire dúvidas sobre comportamento físico-químico, interpretação de resultados ou procedimentos sem sair do sistema.',
   },
   {
     titulo: 'Dashboard: qualidade em tempo real',
@@ -269,7 +269,7 @@ function TourAnalise() {
                 {tab === 1 && <MockupFormOF />}
                 {tab === 2 && <MockupFormAnalise />}
                 {tab === 3 && <MockupAlertas />}
-                {tab === 4 && <MockupParecerIA />}
+                {tab === 4 && <MockupChatIA />}
                 {tab === 5 && <MockupDashboard />}
               </motion.div>
             </AnimatePresence>
@@ -585,44 +585,101 @@ function MockupAlertas() {
   )
 }
 
-// ── Mockup 5: Parecer com IA ─────────────────────────────────────────────────
-function MockupParecerIA() {
+// ── Mockup 5: Chat com IA ─────────────────────────────────────────────────────
+function MockupChatIA() {
+  const logoFilter = 'hue-rotate(-90deg) brightness(1.5) drop-shadow(0 0 6px rgba(74,222,128,0.7))'
+  const glowShadow = '0 0 0 1px rgba(74,222,128,0.3), 0 0 16px rgba(74,222,128,0.3), 0 4px 16px rgba(0,0,0,0.6)'
+
   return (
-    <div>
-      {/* Toolbar */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-zinc-950">
-        <div className="flex items-center gap-2">
+    <div className="relative bg-zinc-950 min-h-[420px]">
+      {/* Fundo — tela do sistema (análise aberta) */}
+      <div className="p-4 opacity-30 pointer-events-none select-none">
+        <div className="flex items-center gap-2 mb-3">
           <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          <span className="text-xs text-zinc-300">Tinta Acrílica Premium</span>
-          <span className="text-[11px] text-zinc-600">● Lote 250517-A</span>
+          <span className="text-xs text-zinc-400">Tinta Acrílica Premium · Lote 250517-A</span>
         </div>
-        <div className="h-6 px-2.5 rounded-md bg-sky-600/20 border border-sky-500/30 flex items-center gap-1.5">
-          <Sparkles className="w-3 h-3 text-sky-400" />
-          <span className="text-[11px] text-sky-400 font-medium">Gerar parecer</span>
+        <div className="space-y-2">
+          {[['Nº O.F.', '1234-56789'], ['Lote', '250517-A'], ['PE real', '1,412'], ['Viscosidade', '128s']].map(([l, v]) => (
+            <div key={l} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/5">
+              <span className="text-[11px] text-zinc-600 w-24">{l}</span>
+              <span className="text-xs text-zinc-400">{v}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="p-4 space-y-3">
-        {/* Parecer gerado */}
-        <div className="rounded-xl border border-white/8 bg-zinc-900 p-3">
-          <div className="flex items-center gap-2 mb-2">
-            <p className="text-[11px] text-zinc-400 font-semibold uppercase tracking-wider">Parecer técnico</p>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400">IA</span>
+      {/* Janela do chat */}
+      <div
+        className="absolute bottom-14 right-3 w-[260px] sm:w-[300px] rounded-2xl border border-zinc-700/60 bg-zinc-900/95 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden"
+        style={{ maxHeight: '340px' }}
+      >
+        {/* Header */}
+        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-700/60 bg-zinc-800/70 flex-shrink-0">
+          <img
+            src="/logo_alquimista_ia.svg"
+            alt="IA"
+            className="h-5 w-auto"
+            style={{ filter: logoFilter }}
+          />
+          <span className="text-xs font-bold tracking-[0.15em] text-zinc-100">ALQUIMISTA</span>
+          <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-semibold">IA</span>
+        </div>
+
+        {/* Mensagens */}
+        <div className="flex-1 overflow-y-auto p-3 space-y-3">
+          {/* Mensagem inicial da IA */}
+          <div className="flex gap-2">
+            <div className="w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <img src="/logo_alquimista_ia.svg" alt="" className="h-3.5 w-auto" style={{ filter: logoFilter }} />
+            </div>
+            <div className="rounded-xl rounded-tl-none bg-zinc-800 px-3 py-2 text-[11px] text-zinc-300 leading-relaxed max-w-[200px]">
+              Olá! Posso ajudar com dúvidas técnicas sobre análises, normas ou comportamento físico-químico dos produtos.
+            </div>
           </div>
-          <div className="space-y-2 text-xs text-zinc-400 leading-relaxed">
-            <p>Análise do lote <span className="text-zinc-200">250517-A</span> — Tinta Acrílica Premium (TAP-2024 v2.1).</p>
-            <p>Pesagem com desvio de <span className="text-emerald-400">+0,04%</span> em relação ao anotado — dentro da tolerância. Líquido de conferência de 930,40 kg coerente com a O.F.</p>
-            <p>Viscosidade de <span className="text-zinc-200">128s no copo Ford 4</span> à 25°C está compatível com a especificação do produto. PE real de <span className="text-zinc-200">1,412 g/cm³</span> contra teórico de 1,408 — variação positiva dentro do esperado.</p>
-            <p className="text-emerald-400 font-medium">Produto apto para liberação. Recomendo aprovação com nota 98.</p>
+
+          {/* Pergunta do usuário */}
+          <div className="flex justify-end">
+            <div className="rounded-xl rounded-tr-none bg-sky-600/25 border border-sky-500/20 px-3 py-2 text-[11px] text-sky-100 leading-relaxed max-w-[200px]">
+              Como a temperatura afeta o PE medido? Analisei a 28°C hoje.
+            </div>
+          </div>
+
+          {/* Resposta da IA */}
+          <div className="flex gap-2">
+            <div className="w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <img src="/logo_alquimista_ia.svg" alt="" className="h-3.5 w-auto" style={{ filter: logoFilter }} />
+            </div>
+            <div className="rounded-xl rounded-tl-none bg-zinc-800 px-3 py-2 text-[11px] text-zinc-300 leading-relaxed max-w-[210px] space-y-1.5">
+              <p>Conforme o manual interno, o PE de tintas acrílicas varia <span className="text-emerald-300 font-medium">≈ −0,002 g/cm³ por °C</span> acima de 25°C.</p>
+              <p>A 28°C, corrija: <span className="text-zinc-100 font-mono">PE₂₅ ≈ 1,412 + 0,006 = <span className="text-emerald-300">1,418</span></span></p>
+              <p className="text-zinc-500">Ref.: Manual de Análise v3.2, seção 4.1.</p>
+            </div>
           </div>
         </div>
 
-        {/* Dados enviados para IA */}
-        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.02] border border-white/5">
-          <Zap className="w-3 h-3 text-zinc-600 flex-shrink-0" />
-          <span className="text-[11px] text-zinc-600">20 parâmetros enviados — pesagem, viscosidade, PE, clima e desvios</span>
+        {/* Input */}
+        <div className="px-3 py-2.5 border-t border-zinc-700/60 bg-zinc-800/50 flex-shrink-0">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-700/50 border border-zinc-600/40">
+            <span className="text-[11px] text-zinc-600 flex-1">Pergunte sobre análises…</span>
+            <div className="w-5 h-5 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+              <Sparkles className="w-3 h-3 text-emerald-400" />
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Botão flutuante da IA */}
+      <button
+        className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-zinc-950 flex items-center justify-center"
+        style={{ boxShadow: glowShadow }}
+      >
+        <img
+          src="/logo_alquimista_ia.svg"
+          alt="IA"
+          className="h-9 w-auto"
+          style={{ filter: logoFilter }}
+        />
+      </button>
     </div>
   )
 }
@@ -753,8 +810,8 @@ function DestaqueAnalise() {
     },
     {
       icone: <Sparkles className="w-5 h-5" />,
-      titulo: 'Parecer com IA',
-      desc: 'A IA recebe 20 parâmetros do lote — pesagem, viscosidade, PE, clima e desvios — e gera um parecer técnico estruturado. Também sugere a nota automaticamente com base em regras configuradas.',
+      titulo: 'Chat com IA especializada',
+      desc: 'IA com documentação técnica própria como referência — manuais internos, tabelas de PE e normas. Responde sobre comportamento físico-químico, correções de temperatura e procedimentos sem sair do sistema.',
       cor: '#fbbf24',
     },
   ]
