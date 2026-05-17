@@ -7,7 +7,11 @@ import { DestiladorPage } from './pages/projetos/DestiladorPage'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
+  useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [pathname])
   return null
 }
 
