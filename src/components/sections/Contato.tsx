@@ -103,9 +103,9 @@ export function Contato() {
                   >
                     {link.icone}
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-medium text-zinc-200">{link.label}</p>
-                    <p className="text-xs text-zinc-600">{link.desc}</p>
+                    <p className="text-xs text-zinc-600 truncate">{link.desc}</p>
                   </div>
                 </motion.a>
               ))}

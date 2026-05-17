@@ -94,27 +94,16 @@ export function Sobre() {
 
 function SobreIllustration() {
   return (
-    <div className="w-full max-w-[340px] aspect-square rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center relative overflow-hidden">
-      <div className="flex flex-col items-center gap-3 text-center px-8">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#e07a5f]/20 flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 stroke-[#e07a5f]" strokeWidth="1.8">
-              <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
-            </svg>
-          </div>
-          <div className="w-8 h-0.5 bg-[#60a5fa]/40 relative">
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-t-2 border-[#60a5fa]/40 rotate-45" />
-          </div>
-          <div className="w-12 h-12 rounded-xl bg-[#6366f1]/20 flex items-center justify-center">
-            <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 stroke-[#6366f1]" strokeWidth="1.8">
-              <path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
-        <p className="text-[11px] text-zinc-600 tracking-wide">Química + Tecnologia</p>
-      </div>
-      <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-[#60a5fa]/5" />
-      <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-[#6366f1]/5" />
+    <div
+      className="w-full max-w-[340px] aspect-square overflow-hidden border border-white/8"
+      style={{ borderRadius: '40% 60% 20% 50% / 45% 30% 20% 55%' }}
+    >
+      <img
+        src="/imagem-portifolio-alquimista.png"
+        alt="Ilustração abstrata — química e tecnologia"
+        className="w-full h-full object-cover object-center"
+        draggable={false}
+      />
     </div>
   )
 }

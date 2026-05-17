@@ -5,17 +5,17 @@ import { useRef } from 'react'
 const QUIMICA = [
   'Análise e controle de qualidade',
   'Desenvolvimento de FDS (NR-26, ABNT)',
-  'Colorimetria e acerto de cor',
+  'Ensaios físico-químicos e registros técnicos',
   'Processos de fabricação de tintas',
   'CRQ ativo',
 ]
 
 const TECNOLOGIA = [
-  'Python · JavaScript · TypeScript',
-  'React · Node.js · FastAPI',
-  'Inteligência artificial aplicada (LLMs)',
-  'SQL · banco de dados relacional',
-  'Vite · Tailwind CSS',
+  'Aplicações com IA generativa e RAG',
+  'Automação de processos operacionais',
+  'Desenvolvimento orientado ao problema real',
+  'Integração de dados industriais e sistemas digitais',
+  'Prototipagem e entrega de MVPs funcionais',
 ]
 
 export function Competencias() {

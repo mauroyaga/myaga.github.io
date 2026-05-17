@@ -143,7 +143,7 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
       </div>
 
       {/* Conteúdo */}
-      <div className="flex flex-col flex-1 p-5 gap-3">
+      <div className="flex flex-col flex-1 p-5 gap-3 min-w-0 overflow-hidden">
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5">
           {projeto.tags.map(tag => (
@@ -157,14 +157,16 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
         </div>
 
         {/* Nome */}
-        <h3 className="font-display text-xl text-zinc-100 leading-snug">
+        <h3 className="font-display text-xl text-zinc-100 leading-snug break-words">
           {projeto.nome}
         </h3>
 
         {/* Descrição */}
-        <p className="text-sm text-zinc-400 leading-relaxed flex-1 line-clamp-3">
-          {projeto.descricao}
-        </p>
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <p className="text-sm text-zinc-400 leading-relaxed line-clamp-3">
+            {projeto.descricao}
+          </p>
+        </div>
 
         {/* Link */}
         {!projeto.emBreve && (
