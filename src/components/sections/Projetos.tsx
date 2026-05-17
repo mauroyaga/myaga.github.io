@@ -22,7 +22,7 @@ const PROJETOS: Projeto[] = [
     nome: 'FDS Digital',
     tags: ['Química', 'Conformidade', 'IA'],
     descricao:
-      'Desenvolvimento e gestão de fichas de dados de segurança química com suporte de inteligência artificial. Substitui processos manuais por um fluxo guiado e rastreável.',
+      'Gestão de fichas de segurança química com IA — fluxo guiado, rastreável e sem papel.',
     icone: <FlaskConical className="w-7 h-7" />,
     cor: '#34d399',
     corTexto: '#059669',
@@ -33,7 +33,7 @@ const PROJETOS: Projeto[] = [
     nome: 'Análise Lab',
     tags: ['Laboratório', 'Dados', 'Automação'],
     descricao:
-      'Plataforma de registro e análise de resultados laboratoriais. Substitui planilhas isoladas por um sistema centralizado com visibilidade em tempo real.',
+      'Resultados laboratoriais centralizados e em tempo real — fim das planilhas isoladas.',
     icone: <BarChart3 className="w-7 h-7" />,
     cor: '#60a5fa',
     corTexto: '#2563eb',
@@ -44,7 +44,7 @@ const PROJETOS: Projeto[] = [
     nome: 'Destilador',
     tags: ['ERP', 'Dashboards', 'Decisão'],
     descricao:
-      'Transforma relatórios exportados de ERP em dashboards interativos para apoio à decisão — alternativa ao Power BI sem necessidade de conexão direta.',
+      'Transforma relatórios de ERP em dashboards interativos para decisão — sem conexão direta ao banco.',
     icone: <LineChart className="w-7 h-7" />,
     cor: '#a78bfa',
     corTexto: '#7c3aed',
@@ -55,7 +55,7 @@ const PROJETOS: Projeto[] = [
     nome: 'Em desenvolvimento',
     tags: ['Tinta', 'Fórmula', 'IA'],
     descricao:
-      'Sistema de suporte ao desenvolvimento de fórmulas de tinta com inteligência artificial. Próximo capítulo do ecossistema Alquimista.',
+      'Suporte inteligente ao desenvolvimento de fórmulas de tinta. Próximo módulo do ecossistema.',
     icone: <Beaker className="w-7 h-7" />,
     cor: '#fbbf24',
     corTexto: '#d97706',
@@ -163,7 +163,7 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
 
         {/* Descrição */}
         <div className="flex-1 min-h-0 overflow-hidden">
-          <p className="text-sm text-zinc-400 leading-relaxed line-clamp-3">
+          <p className="text-sm text-zinc-400 leading-relaxed">
             {projeto.descricao}
           </p>
         </div>
