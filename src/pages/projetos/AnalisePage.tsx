@@ -908,7 +908,7 @@ function DestaqueAnalise() {
     {
       icone: <Sparkles className="w-5 h-5" />,
       titulo: 'Chat com IA especializada',
-      desc: 'IA com documentação técnica própria como referência — manuais internos, tabelas de PE e normas. Responde sobre comportamento físico-químico, correções de temperatura e procedimentos sem sair do sistema.',
+      desc: 'IA com documentação técnica própria como referência — manuais internos, tabelas de PE e normas. Responde sobre comportamento físico-químico e procedimentos sem sair do sistema.',
       cor: '#fbbf24',
     },
   ]
