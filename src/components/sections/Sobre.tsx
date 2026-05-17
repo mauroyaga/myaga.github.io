@@ -52,7 +52,7 @@ export function Sobre() {
               >
                 Formei-me Técnico em Química e fui buscar a tecnologia não para sair
                 da química, mas para aplicá-la. Começou com planilhas substituindo
-                documentos. Escalou para aplicações com IA. Com CRQ ativo e formação
+                documentos. Escalou para aplicações com IA. Com minha experiência profissional e formação
                 em ADS, hoje me posiciono onde os dois mundos se encontram — entendo
                 o laboratório e o chão de fábrica por dentro e construo a ferramenta que ele precisa.
               </motion.p>
