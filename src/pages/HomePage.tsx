@@ -2,6 +2,7 @@ import { Navbar } from '../components/layout/Navbar'
 import { Hero } from '../components/sections/Hero'
 import { Sobre } from '../components/sections/Sobre'
 import { Metodo } from '../components/sections/Metodo'
+import { Projetos } from '../components/sections/Projetos'
 
 export function HomePage() {
   return (
@@ -11,10 +12,7 @@ export function HomePage() {
         <Hero />
         <Sobre />
         <Metodo />
-
-        <section id="projetos" className="min-h-screen bg-[#f1f5f9] flex items-center justify-center">
-          <p className="text-zinc-400 text-sm">Projetos — em construção</p>
-        </section>
+        <Projetos />
 
         <section id="competencias" className="min-h-screen bg-[#f8f7f4] flex items-center justify-center">
           <p className="text-zinc-400 text-sm">Competências — em construção</p>
