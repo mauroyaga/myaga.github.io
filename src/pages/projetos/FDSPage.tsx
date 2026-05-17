@@ -140,7 +140,7 @@ function NarrativaFDS() {
                       : <span className="text-[8px] text-zinc-600">—</span>
                     }
                   </div>
-                  <span className="text-xs text-zinc-500 flex-1">{s.nome}</span>
+                  <span className="text-xs text-zinc-500 flex-1 min-w-0 truncate">{s.nome}</span>
                   {s.status && (
                     <span className={`text-[10px] flex-shrink-0 ${
                       s.status === 'desatualizado' ? 'text-[#fbbf24]/60' : 'text-[#fb7185]/60'
