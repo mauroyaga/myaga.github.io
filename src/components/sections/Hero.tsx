@@ -11,8 +11,8 @@ const fadeUp = {
 }
 
 export function Hero() {
-  function scrollToSobre() {
-    document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })
+  function scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
@@ -77,13 +77,13 @@ export function Hero() {
               className="flex items-center gap-4 flex-wrap"
             >
               <button
-                onClick={scrollToSobre}
+                onClick={() => scrollTo('projetos')}
                 className="px-6 py-3 rounded-xl bg-[#6366f1] text-white text-sm font-medium hover:bg-[#4f46e5] transition-all hover:scale-[1.02]"
               >
                 Conheça o trabalho
               </button>
               <button
-                onClick={scrollToSobre}
+                onClick={() => scrollTo('sobre')}
                 className="text-sm font-medium text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1.5"
               >
                 Sobre mim
@@ -107,7 +107,7 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <motion.button
-        onClick={scrollToSobre}
+        onClick={() => scrollTo('sobre')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
