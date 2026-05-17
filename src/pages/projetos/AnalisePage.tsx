@@ -857,7 +857,7 @@ function EcossistemaAnalise() {
             Um módulo de um sistema maior.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-8">
-            O Análise Lab integra o ecossistema Alquimista — plataforma modular para a indústria química. Os resultados de peso específico real alimentam automaticamente a Seção 9 da FDS Digital. O mesmo produto que tem histórico de análise tem ficha de segurança rastreável.
+            O Análise Lab é um módulo do ecossistema Alquimista — plataforma construída para a indústria química. O mesmo produto que tem histórico de análises e rastreabilidade de lotes faz parte de um sistema maior, que conecta laboratório, processos e documentação técnica.
           </p>
           <Link
             to="/"
