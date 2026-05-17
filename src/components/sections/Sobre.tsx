@@ -58,6 +58,18 @@ export function Sobre() {
                 fábrica por dentro e construo a ferramenta que ele precisa.
               </motion.p>
             </div>
+
+            {/* Assinatura */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="mt-8 pt-6 border-t border-white/8 max-w-[620px]"
+            >
+              <p className="text-zinc-100 font-semibold text-sm mb-1">Mauro Yaga</p>
+              <p className="text-zinc-500 text-[12px]">Técnico em Química · Analista e Desenvolvedor de Sistemas</p>
+              <p className="text-zinc-600 text-[11px] mt-1 font-mono">CRQ 09407428 · 9ª Região</p>
+            </motion.div>
           </div>
 
           {/* Visual — 5 colunas */}
