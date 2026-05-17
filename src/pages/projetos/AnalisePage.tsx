@@ -65,7 +65,7 @@ function HeroAnalise() {
 function NarrativaAnalise() {
   const dores = [
     'Resultados registrados em planilhas que vão crescendo, tornando difícil o acesso e o comparativo de dados entre lotes',
-    'Cálculos de desvio feitos manualmente criam margem de erro em análises críticas de qualidade',
+    'Fórmulas de cálculo podem quebrar gerando margem de erros, com dificuldade para comparar dados entre registros',
     'Sem rastreabilidade: quem aprovou, quando, com qual nota — não fica registrado de forma confiável',
     'Histórico de um produto exige garimpar arquivos físicos ou planilhas espalhadas entre analistas',
   ]
