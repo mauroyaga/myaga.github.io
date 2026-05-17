@@ -63,7 +63,7 @@ export function Sobre() {
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-8 flex flex-wrap gap-3"
+              className="mt-8 grid grid-cols-2 gap-3"
             >
               {['12 anos em tintas', '8 anos em laboratório', 'Técnico em Química', 'Analista de Sistemas'].map(tag => (
                 <span
