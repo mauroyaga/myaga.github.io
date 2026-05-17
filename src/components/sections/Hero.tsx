@@ -52,7 +52,7 @@ export function Hero() {
               custom={0.25}
               className="font-display text-4xl md:text-5xl lg:text-6xl text-zinc-100 leading-tight"
             >
-              Processos complexos merecem soluções que funcionam.
+              Do chão de fábrica ao código — transformo processos em soluções digitais.
             </motion.h1>
 
             {/* Subheadline */}
