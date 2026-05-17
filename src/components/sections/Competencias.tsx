@@ -12,10 +12,10 @@ const QUIMICA = [
 
 const TECNOLOGIA = [
   'Aplicações com IA generativa e RAG',
-  'Automação de processos operacionais',
   'Desenvolvimento orientado ao problema real',
   'Integração de dados industriais e sistemas digitais',
   'Prototipagem e entrega de MVPs funcionais',
+  'Formação em Análise e Desenvolvimento de Sistemas',
 ]
 
 export function Competencias() {
