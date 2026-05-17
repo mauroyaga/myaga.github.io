@@ -30,6 +30,7 @@ function HeroFDS() {
   return (
     <section className="relative bg-[#0f0f0f] pt-32 pb-24 overflow-hidden">
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#34d399]/5 blur-3xl" />
+      <img src="/hexagon_honeycomb.svg" aria-hidden draggable={false} className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.07]" />
       <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-300 transition-colors mb-10">
@@ -261,8 +262,9 @@ function TourFDS() {
   const [tab, setTab] = useState(0)
 
   return (
-    <section className="bg-[#0f0f0f] py-24 overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
+    <section className="relative bg-[#0f0f0f] py-24 overflow-hidden">
+      <img src="/hexagon_honeycomb.svg" aria-hidden draggable={false} className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.07]" />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="text-center mb-12">
           <span className="inline-block text-[11px] font-semibold tracking-[0.2em] uppercase text-[#34d399] mb-4">Tour pela interface</span>
           <h2 className="font-display text-3xl md:text-4xl text-zinc-100">Conheça o sistema por dentro.</h2>
@@ -836,8 +838,9 @@ function DestaquesFDS() {
 // ─── ECOSSISTEMA ─────────────────────────────────────────────────────────────
 function EcossistemaFDS() {
   return (
-    <section className="bg-[#131318] py-24">
-      <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
+    <section className="relative bg-[#131318] py-24 overflow-hidden">
+      <img src="/hexagon_honeycomb.svg" aria-hidden draggable={false} className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.06]" />
+      <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="max-w-[600px] mx-auto text-center">
           <span className="inline-block text-[11px] font-semibold tracking-[0.2em] uppercase text-[#6366f1] mb-4">Ecossistema Alquimista</span>
           <h2 className="font-display text-3xl md:text-4xl text-zinc-100 leading-tight mb-6">
