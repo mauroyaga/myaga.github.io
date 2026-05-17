@@ -22,7 +22,7 @@ const PROJETOS: Projeto[] = [
     nome: 'FDS Digital',
     tags: ['Química', 'Conformidade', 'IA'],
     descricao:
-      'Gestão de fichas de segurança química com IA — fluxo guiado, rastreável e sem papel.',
+      'Gestão de fichas de segurança química com IA — fluxo guiado, rastreável e assistido pelo químico responsável.',
     icone: <FlaskConical className="w-7 h-7" />,
     cor: '#34d399',
     corTexto: '#059669',
