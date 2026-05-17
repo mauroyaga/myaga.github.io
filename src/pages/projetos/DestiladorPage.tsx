@@ -367,8 +367,8 @@ function MockupImportacao() {
           <div className="w-10 h-10 rounded-xl bg-violet-500/15 flex items-center justify-center">
             <FileSpreadsheet className="w-5 h-5 text-violet-400" />
           </div>
-          <div className="text-center">
-            <p className="text-sm font-medium text-zinc-200">RELATORIO_VENDAS_MAIO_2025_v2_FINAL.xlsx</p>
+          <div className="text-center w-full min-w-0">
+            <p className="text-sm font-medium text-zinc-200 truncate px-2">RELATORIO_VENDAS_MAIO_2025_v2_FINAL.xlsx</p>
             <p className="text-[11px] text-zinc-500 mt-0.5">248 KB · detectado 1.247 registros</p>
           </div>
           <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-400 flex items-center gap-1">
