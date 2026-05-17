@@ -113,7 +113,6 @@ export function Hero() {
         transition={{ delay: 1.2, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors"
       >
-        <span className="text-[10px] tracking-[0.2em] uppercase">Rolar</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
