@@ -149,13 +149,13 @@ const TABS = [
   { num: '03', label: 'Análise e Resultado' },
   { num: '04', label: 'Alertas automáticos' },
   { num: '05', label: 'Parecer com IA' },
-  { num: '06', label: 'Histórico' },
+  { num: '06', label: 'Dashboard' },
 ]
 
 const TAB_INFO = [
   {
-    titulo: 'Todos os lotes em um lugar',
-    desc: 'Tabela com todas as análises — busca por O.F., produto ou código, filtro por resultado. Cada linha mostra o status do lote de forma imediata: Aprovado, Reprovado ou Quarentena. Uma análise concluída não pode ser editada, garantindo rastreabilidade.',
+    titulo: 'KPIs e lotes em um lugar',
+    desc: 'A listagem exibe os indicadores do período no topo — total de análises, desvios de PE e taxa de aprovação. A tabela abaixo tem busca por O.F., produto ou código. Cada lote mostra resultado imediato: Aprovado, Reprovado ou Quarentena.',
   },
   {
     titulo: 'O.F., lote e pesagem com cálculos automáticos',
@@ -171,11 +171,11 @@ const TAB_INFO = [
   },
   {
     titulo: 'IA analisa o lote completo',
-    desc: 'Com um clique, a IA recebe todos os dados do lote — pesagem, viscosidade, PE real, temperatura, clima e desvios — e gera um parecer técnico estruturado. Ela também sugere a nota do produto automaticamente com base em regras configuradas.',
+    desc: 'Com um clique, a IA recebe todos os dados do lote — pesagem, viscosidade, PE real, temperatura, clima e desvios — e gera um parecer técnico estruturado. Ideal para análises fora do padrão ou quando o responsável precisa justificar uma decisão.',
   },
   {
-    titulo: 'Rastreabilidade completa por produto',
-    desc: 'O histórico mostra todas as análises anteriores do mesmo produto — data, lote, nota, PE real e resultado. O gráfico de tendência revela variações no peso específico ao longo do tempo, permitindo identificar deriva de processo antes que vire problema.',
+    titulo: 'Dashboard: qualidade em tempo real',
+    desc: 'Visão geral por período — KPIs de total, desvios de PE, aprovação e completagem. O scatter PE Real × PE Teórico revela dispersão de processo em cada lote. Filtros por tipo (produto acabado / MP interna) e período (hoje, 7 dias, 30 dias).',
   },
 ]
 
@@ -270,7 +270,7 @@ function TourAnalise() {
                 {tab === 2 && <MockupFormAnalise />}
                 {tab === 3 && <MockupAlertas />}
                 {tab === 4 && <MockupParecerIA />}
-                {tab === 5 && <MockupHistorico />}
+                {tab === 5 && <MockupDashboard />}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -316,6 +316,20 @@ function MockupListaAnalise() {
             <span className="text-[11px] text-white font-medium">+ Nova análise</span>
           </div>
         </div>
+      </div>
+
+      {/* KPI cards */}
+      <div className="grid grid-cols-3 gap-0 border-b border-white/8">
+        {[
+          { label: 'Total (mês)', valor: '247', cor: 'text-sky-400', bg: 'bg-sky-500/5' },
+          { label: 'Desvios PE', valor: '12', cor: 'text-amber-400', bg: 'bg-amber-500/5' },
+          { label: 'Aprovação', valor: '78,3%', cor: 'text-emerald-400', bg: 'bg-emerald-500/5' },
+        ].map((k) => (
+          <div key={k.label} className={`${k.bg} px-4 py-3 border-r border-white/5 last:border-0`}>
+            <p className="text-[10px] text-zinc-600 uppercase tracking-wider mb-1">{k.label}</p>
+            <p className={`text-lg font-semibold tabular-nums ${k.cor}`}>{k.valor}</p>
+          </div>
+        ))}
       </div>
 
       {/* Header tabela */}
@@ -589,20 +603,6 @@ function MockupParecerIA() {
       </div>
 
       <div className="p-4 space-y-3">
-        {/* Nota sugerida pela IA */}
-        <div className="rounded-xl border border-sky-900/40 bg-sky-400/5 p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-              <p className="text-[11px] text-sky-400 font-semibold uppercase tracking-wider">Nota sugerida pela IA</p>
-            </div>
-            <span className="text-lg font-bold text-emerald-400">98</span>
-          </div>
-          <p className="text-[11px] text-zinc-500 leading-relaxed">
-            Baseado em viscosidade dentro da faixa, desvio de pesagem &lt;0,1% e PE real próximo ao teórico.
-          </p>
-        </div>
-
         {/* Parecer gerado */}
         <div className="rounded-xl border border-white/8 bg-zinc-900 p-3">
           <div className="flex items-center gap-2 mb-2">
@@ -628,92 +628,100 @@ function MockupParecerIA() {
 }
 
 // ── Mockup 6: Histórico ───────────────────────────────────────────────────────
-function MockupHistorico() {
-  const historico = [
-    { data: '17/05', lote: '250517-A', nota: 98, pe: '1,412', resultado: 'aprovado' },
-    { data: '10/05', lote: '250510-A', nota: 97, pe: '1,410', resultado: 'aprovado' },
-    { data: '03/05', lote: '250503-B', nota: 95, pe: '1,405', resultado: 'quarentena' },
-    { data: '26/04', lote: '250426-A', nota: 98, pe: '1,411', resultado: 'aprovado' },
-    { data: '19/04', lote: '250419-A', nota: 96, pe: '1,408', resultado: 'aprovado' },
+function MockupDashboard() {
+  // Scatter: PE Real × PE Teórico (10 pontos fictícios)
+  const scatter = [
+    { teo: 1.408, real: 1.412 }, { teo: 1.408, real: 1.406 },
+    { teo: 1.420, real: 1.418 }, { teo: 1.420, real: 1.425 },
+    { teo: 1.395, real: 1.393 }, { teo: 1.395, real: 1.402 },
+    { teo: 1.412, real: 1.410 }, { teo: 1.412, real: 1.415 },
+    { teo: 1.400, real: 1.398 }, { teo: 1.430, real: 1.435 },
   ]
+  const peMin = 1.388, peMax = 1.440
+  const W = 200, H = 80
+  const toX = (v: number) => ((v - peMin) / (peMax - peMin)) * W
+  const toY = (v: number) => H - ((v - peMin) / (peMax - peMin)) * H
+  // linha de referência (PE real = PE teórico)
+  const refPoints = `${toX(peMin)},${toY(peMin)} ${toX(peMax)},${toY(peMax)}`
 
-  const badgeClasses: Record<string, string> = {
-    aprovado: 'bg-emerald-500/15 text-emerald-400',
-    reprovado: 'bg-red-500/15 text-red-400',
-    quarentena: 'bg-amber-500/10 text-amber-400',
-  }
-
-  // Pontos do gráfico SVG para PE real ao longo das 5 análises
-  // PE values: 1.412, 1.410, 1.405, 1.411, 1.408 → normalizar entre 0-40
-  const peValues = [1.412, 1.410, 1.405, 1.411, 1.408]
-  const peMin = 1.403
-  const peMax = 1.415
-  const chartW = 220
-  const chartH = 44
-  const points = peValues.map((pe, i) => {
-    const x = (i / (peValues.length - 1)) * chartW
-    const y = chartH - ((pe - peMin) / (peMax - peMin)) * chartH
-    return `${x},${y}`
-  }).join(' ')
+  // Barras por dia (últimos 7 dias)
+  const barras = [12, 18, 9, 22, 15, 20, 14]
+  const dias = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
+  const maxBar = Math.max(...barras)
 
   return (
     <div>
+      {/* Toolbar */}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-zinc-950">
         <div className="flex items-center gap-2">
-          <History className="w-4 h-4 text-sky-400" />
-          <span className="text-xs text-zinc-300 font-medium">Tinta Acrílica Premium</span>
-          <span className="text-[11px] text-zinc-600">— histórico de lotes</span>
+          <BarChart3 className="w-4 h-4 text-sky-400" />
+          <span className="text-xs text-zinc-300 font-medium">Visão Geral</span>
         </div>
-        <span className="text-[10px] text-zinc-600 font-mono">TAP-2024</span>
+        <div className="flex items-center gap-1">
+          {['Hoje', '7 dias', '30 dias'].map((p, i) => (
+            <span key={p} className={`text-[10px] px-2 py-0.5 rounded ${i === 1 ? 'bg-sky-500/15 text-sky-400' : 'text-zinc-600'}`}>{p}</span>
+          ))}
+        </div>
       </div>
 
-      {/* Lista */}
-      <div className="p-3 space-y-1.5">
-        {historico.map((h, i) => (
-          <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/[0.02] transition-colors">
-            <span className="text-[11px] text-zinc-600 w-10 flex-shrink-0">{h.data}</span>
-            <span className="text-[11px] text-zinc-500 font-mono flex-shrink-0">{h.lote}</span>
-            <span className="text-[11px] text-zinc-600 flex-shrink-0">PE {h.pe}</span>
-            <div className="flex-1" />
-            <span className={`text-[11px] font-semibold ${h.nota >= 97 ? 'text-emerald-400' : 'text-amber-400'}`}>{h.nota}</span>
-            <span className={`text-[10px] px-2 py-0.5 rounded-full flex-shrink-0 ${badgeClasses[h.resultado]}`}>
-              {h.resultado === 'aprovado' ? '✓' : '●'} {h.resultado}
-            </span>
+      {/* KPI cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 border-b border-white/8">
+        {[
+          { label: 'Total análises', valor: '247', cor: 'text-sky-400', bg: 'bg-sky-500/5' },
+          { label: 'Desvios PE', valor: '12', cor: 'text-amber-400', bg: 'bg-amber-500/5' },
+          { label: 'Aprov. nota 100', valor: '78,3%', cor: 'text-emerald-400', bg: 'bg-emerald-500/5' },
+          { label: 'Completagem', valor: '23,1%', cor: 'text-violet-400', bg: 'bg-violet-500/5' },
+        ].map((k, i) => (
+          <div key={k.label} className={`${k.bg} px-4 py-3 border-r border-white/5 last:border-0 ${i >= 2 ? 'border-t border-white/5 sm:border-t-0' : ''}`}>
+            <p className="text-[10px] text-zinc-600 uppercase tracking-wider mb-0.5">{k.label}</p>
+            <p className={`text-xl font-semibold tabular-nums ${k.cor}`}>{k.valor}</p>
           </div>
         ))}
       </div>
 
-      {/* Gráfico PE */}
-      <div className="mx-4 mb-4 rounded-xl border border-white/5 bg-zinc-900/60 p-4">
-        <div className="flex items-center gap-2 mb-3">
-          <TrendingUp className="w-3.5 h-3.5 text-sky-400" />
-          <p className="text-[11px] text-zinc-500 uppercase tracking-wider">Tendência — PE real</p>
+      {/* Gráficos */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+        {/* Barras por dia */}
+        <div className="p-4 border-r border-white/5">
+          <div className="flex items-center gap-2 mb-3">
+            <BarChart3 className="w-3.5 h-3.5 text-sky-400" />
+            <p className="text-[11px] text-zinc-500 uppercase tracking-wider">Análises por dia</p>
+          </div>
+          <div className="flex items-end gap-1.5 h-14">
+            {barras.map((v, i) => (
+              <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                <div
+                  className="w-full rounded-sm bg-sky-500/30"
+                  style={{ height: `${(v / maxBar) * 48}px` }}
+                />
+                <span className="text-[8px] text-zinc-700">{dias[i]}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="relative w-full overflow-hidden">
-          <svg viewBox={`-4 -4 ${chartW + 8} ${chartH + 8}`} className="w-full h-14" preserveAspectRatio="xMidYMid meet">
-            {/* Grid lines */}
-            <line x1="0" y1={chartH / 2} x2={chartW} y2={chartH / 2} stroke="#27272a" strokeWidth="1" strokeDasharray="4 4" />
-            <line x1="0" y1="0" x2={chartW} y2="0" stroke="#27272a" strokeWidth="1" />
-            <line x1="0" y1={chartH} x2={chartW} y2={chartH} stroke="#27272a" strokeWidth="1" />
-            {/* Linha PE */}
-            <polyline
-              points={points}
-              fill="none"
-              stroke="#38bdf8"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            />
+
+        {/* Scatter PE */}
+        <div className="p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <TrendingUp className="w-3.5 h-3.5 text-violet-400" />
+            <p className="text-[11px] text-zinc-500 uppercase tracking-wider">PE Real × PE Teórico</p>
+          </div>
+          <svg viewBox={`-4 -4 ${W + 8} ${H + 8}`} className="w-full h-20">
+            {/* Linha de referência */}
+            <polyline points={refPoints} stroke="#3f3f46" strokeWidth="1" strokeDasharray="3 3" fill="none" />
             {/* Pontos */}
-            {peValues.map((pe, i) => {
-              const x = (i / (peValues.length - 1)) * chartW
-              const y = chartH - ((pe - peMin) / (peMax - peMin)) * chartH
-              return <circle key={i} cx={x} cy={y} r="3" fill="#38bdf8" />
+            {scatter.map((p, i) => {
+              const dx = Math.abs(p.real - p.teo)
+              const color = dx < 0.005 ? '#34d399' : dx < 0.012 ? '#fbbf24' : '#fb7185'
+              return <circle key={i} cx={toX(p.teo)} cy={toY(p.real)} r="3.5" fill={color} fillOpacity="0.8" />
             })}
           </svg>
-          <div className="flex justify-between mt-1">
-            {historico.map((h, i) => (
-              <span key={i} className="text-[9px] text-zinc-700">{h.data}</span>
+          <div className="flex items-center gap-3 mt-1">
+            {[['#34d399', 'dentro'], ['#fbbf24', 'atenção'], ['#fb7185', 'NC']].map(([c, l]) => (
+              <div key={l} className="flex items-center gap-1">
+                <div className="w-2 h-2 rounded-full" style={{ background: c }} />
+                <span className="text-[9px] text-zinc-600">{l}</span>
+              </div>
             ))}
           </div>
         </div>
