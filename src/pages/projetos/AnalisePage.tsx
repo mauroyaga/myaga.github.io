@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  ArrowLeft, BarChart3, FileText, Printer,
+  ArrowLeft, BarChart3, FileText,
   ChevronLeft, ChevronRight, Check, TrendingUp,
-  FlaskConical, Clock, History, Zap,
+  FlaskConical, Clock, History, Zap, Bell, Sparkles, X,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/layout/Navbar'
@@ -147,7 +147,9 @@ const TABS = [
   { num: '01', label: 'Lista de análises' },
   { num: '02', label: 'O.F. e Pesagem' },
   { num: '03', label: 'Análise e Resultado' },
-  { num: '04', label: 'Histórico' },
+  { num: '04', label: 'Alertas automáticos' },
+  { num: '05', label: 'Parecer com IA' },
+  { num: '06', label: 'Histórico' },
 ]
 
 const TAB_INFO = [
@@ -162,6 +164,14 @@ const TAB_INFO = [
   {
     titulo: 'Viscosidade, PE e resultado final',
     desc: 'Viscosidade medida em copo Ford (número do copo + segundos de escoamento), temperatura da análise e peso específico real. O sistema compara PE real com o teórico. A nota e o resultado (Aprovado / Reprovado / Quarentena) ficam registrados com data e hora de liberação automáticas.',
+  },
+  {
+    titulo: 'Alertas que disparam sozinhos',
+    desc: 'Configure alertas por produto, cliente, código ou número de O.F. — o sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado. Não tem como esquecer: o alerta aparece antes de qualquer dado ser salvo.',
+  },
+  {
+    titulo: 'IA analisa o lote completo',
+    desc: 'Com um clique, a IA recebe todos os dados do lote — pesagem, viscosidade, PE real, temperatura, clima e desvios — e gera um parecer técnico estruturado. Ela também sugere a nota do produto automaticamente com base em regras configuradas.',
   },
   {
     titulo: 'Rastreabilidade completa por produto',
@@ -258,7 +268,9 @@ function TourAnalise() {
                 {tab === 0 && <MockupListaAnalise />}
                 {tab === 1 && <MockupFormOF />}
                 {tab === 2 && <MockupFormAnalise />}
-                {tab === 3 && <MockupHistorico />}
+                {tab === 3 && <MockupAlertas />}
+                {tab === 4 && <MockupParecerIA />}
+                {tab === 5 && <MockupHistorico />}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -488,7 +500,134 @@ function MockupFormAnalise() {
   )
 }
 
-// ── Mockup 4: Histórico ───────────────────────────────────────────────────────
+// ── Mockup 4: Alertas ────────────────────────────────────────────────────────
+function MockupAlertas() {
+  const alertasAtivos = [
+    { criterio: 'produto', valor: 'Tinta Acrílica Premium', msg: 'Produto crítico — verificar viscosidade com especificação revisada v2.1', hora: '14:28' },
+    { criterio: 'cliente', valor: 'Distribuidora Central', msg: 'Cliente com exigência de PE mínimo 1,410 — confirmar antes de liberar', hora: '14:28' },
+  ]
+  const alertasConfig = [
+    { criterio: 'produto', valor: 'Tinta Acrílica Premium', msg: 'Produto crítico — verificar viscosidade com especificação revisada v2.1' },
+    { criterio: 'cliente', valor: 'Distribuidora Central', msg: 'Cliente com exigência de PE mínimo 1,410' },
+    { criterio: 'codigo', valor: 'TAP-2024 v2', msg: 'Nova versão — comparar PE com lotes anteriores' },
+  ]
+
+  return (
+    <div>
+      {/* Toolbar */}
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-zinc-950">
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          <span className="text-xs text-zinc-400">Tinta Acrílica Premium <span className="text-zinc-600 ml-1">● Rascunho</span></span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] text-amber-400 font-semibold">2 alertas</span>
+          <div className="w-5 h-5 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center">
+            <Bell className="w-3 h-3 text-amber-400" />
+          </div>
+        </div>
+      </div>
+
+      {/* Modal de alerta flutuante */}
+      <div className="p-4 space-y-3">
+        <p className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1">Alertas disparados agora</p>
+        {alertasAtivos.map((a, i) => (
+          <div key={i} className="rounded-xl border border-amber-500/25 bg-amber-500/5 p-3">
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start gap-2.5">
+                <div className="w-6 h-6 rounded-lg bg-amber-500/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Bell className="w-3.5 h-3.5 text-amber-400" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 font-semibold uppercase">{a.criterio}</span>
+                    <span className="text-[10px] text-zinc-500">{a.valor}</span>
+                  </div>
+                  <p className="text-xs text-zinc-300 leading-snug">{a.msg}</p>
+                </div>
+              </div>
+              <button className="flex-shrink-0">
+                <X className="w-3.5 h-3.5 text-zinc-600 hover:text-zinc-400" />
+              </button>
+            </div>
+          </div>
+        ))}
+
+        {/* Alertas configurados */}
+        <div className="mt-4 pt-3 border-t border-white/5">
+          <p className="text-[10px] text-zinc-600 uppercase tracking-widest mb-2">Alertas configurados</p>
+          <div className="space-y-1.5">
+            {alertasConfig.map((c, i) => (
+              <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.02] border border-white/5">
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-500 font-semibold uppercase flex-shrink-0">{c.criterio}</span>
+                <span className="text-xs text-zinc-500 flex-shrink-0 font-mono">{c.valor}</span>
+                <span className="text-[11px] text-zinc-600 flex-1 min-w-0 truncate">{c.msg}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Mockup 5: Parecer com IA ─────────────────────────────────────────────────
+function MockupParecerIA() {
+  return (
+    <div>
+      {/* Toolbar */}
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-zinc-950">
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span className="text-xs text-zinc-300">Tinta Acrílica Premium</span>
+          <span className="text-[11px] text-zinc-600">● Lote 250517-A</span>
+        </div>
+        <div className="h-6 px-2.5 rounded-md bg-sky-600/20 border border-sky-500/30 flex items-center gap-1.5">
+          <Sparkles className="w-3 h-3 text-sky-400" />
+          <span className="text-[11px] text-sky-400 font-medium">Gerar parecer</span>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-3">
+        {/* Nota sugerida pela IA */}
+        <div className="rounded-xl border border-sky-900/40 bg-sky-400/5 p-3">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+              <p className="text-[11px] text-sky-400 font-semibold uppercase tracking-wider">Nota sugerida pela IA</p>
+            </div>
+            <span className="text-lg font-bold text-emerald-400">98</span>
+          </div>
+          <p className="text-[11px] text-zinc-500 leading-relaxed">
+            Baseado em viscosidade dentro da faixa, desvio de pesagem &lt;0,1% e PE real próximo ao teórico.
+          </p>
+        </div>
+
+        {/* Parecer gerado */}
+        <div className="rounded-xl border border-white/8 bg-zinc-900 p-3">
+          <div className="flex items-center gap-2 mb-2">
+            <p className="text-[11px] text-zinc-400 font-semibold uppercase tracking-wider">Parecer técnico</p>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400">IA</span>
+          </div>
+          <div className="space-y-2 text-xs text-zinc-400 leading-relaxed">
+            <p>Análise do lote <span className="text-zinc-200">250517-A</span> — Tinta Acrílica Premium (TAP-2024 v2.1).</p>
+            <p>Pesagem com desvio de <span className="text-emerald-400">+0,04%</span> em relação ao anotado — dentro da tolerância. Líquido de conferência de 930,40 kg coerente com a O.F.</p>
+            <p>Viscosidade de <span className="text-zinc-200">128s no copo Ford 4</span> à 25°C está compatível com a especificação do produto. PE real de <span className="text-zinc-200">1,412 g/cm³</span> contra teórico de 1,408 — variação positiva dentro do esperado.</p>
+            <p className="text-emerald-400 font-medium">Produto apto para liberação. Recomendo aprovação com nota 98.</p>
+          </div>
+        </div>
+
+        {/* Dados enviados para IA */}
+        <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.02] border border-white/5">
+          <Zap className="w-3 h-3 text-zinc-600 flex-shrink-0" />
+          <span className="text-[11px] text-zinc-600">20 parâmetros enviados — pesagem, viscosidade, PE, clima e desvios</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Mockup 6: Histórico ───────────────────────────────────────────────────────
 function MockupHistorico() {
   const historico = [
     { data: '17/05', lote: '250517-A', nota: 98, pe: '1,412', resultado: 'aprovado' },
@@ -599,15 +738,15 @@ function DestaqueAnalise() {
       cor: '#34d399',
     },
     {
-      icone: <FileText className="w-5 h-5" />,
-      titulo: 'Duplicar análise',
-      desc: 'Cria nova análise a partir de anterior do mesmo produto. Agiliza registros repetitivos sem perder a rastreabilidade individual de cada lote.',
+      icone: <Bell className="w-5 h-5" />,
+      titulo: 'Alertas configuráveis',
+      desc: 'Configure alertas por produto, cliente ou código — o sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado, antes de qualquer dado ser salvo.',
       cor: '#a78bfa',
     },
     {
-      icone: <Printer className="w-5 h-5" />,
-      titulo: 'Etiqueta de liberação',
-      desc: 'Impressão direta com dados do lote, analista, resultado e nota. Pronta para colar no tambor ou incluir no relatório de expedição.',
+      icone: <Sparkles className="w-5 h-5" />,
+      titulo: 'Parecer com IA',
+      desc: 'A IA recebe 20 parâmetros do lote — pesagem, viscosidade, PE, clima e desvios — e gera um parecer técnico estruturado. Também sugere a nota automaticamente com base em regras configuradas.',
       cor: '#fbbf24',
     },
   ]
