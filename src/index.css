@@ -1,0 +1,74 @@
+@import '@fontsource-variable/geist';
+@import '@fontsource/dm-serif-display';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cores do ecossistema Alquimista */
+    --brand-blue: #60a5fa;
+    --accent-indigo: #6366f1;
+
+    /* Backgrounds claros */
+    --bg-base: #f8f7f4;
+    --bg-alt: #f1f5f9;
+    --bg-card: #ffffff;
+
+    /* Backgrounds escuros */
+    --bg-dark: #0f0f0f;
+    --bg-darker: #09090b;
+
+    /* Texto */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --text-light: #f4f4f5;
+    --text-light-secondary: #a1a1aa;
+
+    /* Paleta ilustrações — cores quentes */
+    --illus-terracota: #e07a5f;
+    --illus-coral: #f4845f;
+    --illus-mel: #f9c74f;
+    --illus-pessego: #ffb997;
+
+    /* Semântico */
+    --semantic-positive: #34d399;
+    --semantic-negative: #fb7185;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Geist Variable', sans-serif;
+  }
+
+  h1, h2 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-indigo);
+  }
+}
