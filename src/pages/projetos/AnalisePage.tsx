@@ -69,15 +69,6 @@ function NarrativaAnalise() {
     'Histórico de um produto exige garimpar arquivos físicos ou planilhas espalhadas entre analistas',
   ]
 
-  const camposVazios = [
-    { label: 'Pesagem total (kg)', valor: '', placeholder: 'não registrado' },
-    { label: 'Líquido conferência', valor: '', placeholder: 'calcular manualmente' },
-    { label: 'Desvio (%)', valor: '', placeholder: '—' },
-    { label: 'Viscosidade (s)', valor: '', placeholder: 'não registrado' },
-    { label: 'Resultado', valor: '', placeholder: 'sem critério definido' },
-    { label: 'Aprovado por', valor: '', placeholder: 'sem registro' },
-  ]
-
   return (
     <section className="bg-[#131318] py-24 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
@@ -123,22 +114,126 @@ function NarrativaAnalise() {
           <motion.div
             initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl bg-[#1c1c22] border border-white/8 p-6"
+            className="rounded-2xl border border-white/8 overflow-hidden"
           >
-            <p className="text-[11px] text-zinc-600 uppercase tracking-widest mb-4">Análise sem sistema — situação comum</p>
-            <div className="space-y-2">
-              {camposVazios.map((c, i) => (
-                <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg bg-white/5 border border-white/5">
-                  <span className="text-xs text-zinc-500 flex-1 min-w-0 truncate">{c.label}</span>
-                  <span className="text-[11px] text-zinc-700 italic flex-shrink-0">{c.placeholder}</span>
-                </div>
-              ))}
-              <p className="text-xs text-zinc-700 mt-3 italic pl-1">resultado: folha de papel no arquivo físico</p>
-            </div>
+            <PlanilhaExcel />
           </motion.div>
         </div>
       </div>
     </section>
+  )
+}
+
+// ─── PLANILHA EXCEL MOCKUP ───────────────────────────────────────────────────
+function PlanilhaExcel() {
+  const cols = ['Data', 'O.F.', 'Produto', 'PE Real', 'Viscosid.', 'Aprovado?', 'Analista', 'Obs.']
+  const rows = [
+    ['12/05', '1234-56721', 'Tinta Acrilica Prem', '1.412', '128s', 'OK', 'Mauro', ''],
+    ['12/05', '1234-56722', 'tinta acrilica prem', '1,41', '—', 'ok', 'M.Y.', 'verificar'],
+    ['13/05', '1234-56730', 'T. Acrílica Premium', '', '131 seg', 'SIM', 'Mauro Y', 'refazer pe'],
+    ['13/05', '1234-56731', 'Solvente X15', '0.998', '45s', 'aprovado', '', ''],
+    ['14/05', '1234-56740', 'SOLVENTE X15', '0,997', '44', 'Aprovado!', 'MY', 'ok tb'],
+    ['14/05', '1234-56741', 'Verniz PU UV', '1.180', '', '', 'Mauro', 'faltou visc'],
+    ['15/05', '', 'Primer Epóxi Ind.', '1.352', '210s', 'REPROV', 'M. Yaga', 'lote ruim'],
+    ['15/05', '1234-56755', 'primer epóxi', '1,35', '209', 'reprovado', '', ''],
+  ]
+
+  // células para destacar em vermelho (inconsistência) e amarelo (dado faltando)
+  const cellClass = (r: number, c: number): string => {
+    if (c === 3 && ['', ''].includes(rows[r][c])) return 'bg-red-200/60 text-red-800'
+    if (c === 3 && r === 2) return 'bg-red-200/60 text-red-800'         // PE vazio
+    if (c === 4 && r === 5) return 'bg-red-200/60 text-red-800'         // viscosidade vazia
+    if (c === 5 && r === 6) return 'bg-amber-100/80 text-amber-800'     // REPROV
+    if (c === 5) {
+      const v = rows[r][5].toLowerCase()
+      if (['ok','sim','aprovado!','aprovado','yes'].includes(v)) return 'bg-emerald-100/70 text-emerald-800'
+      if (['reprovado','reprov'].includes(v)) return 'bg-red-200/60 text-red-800'
+    }
+    if (c === 6 && rows[r][6] === '') return 'bg-amber-100/80 text-amber-800'
+    if (c === 1 && rows[r][1] === '') return 'bg-red-200/60 text-red-800'
+    return ''
+  }
+
+  return (
+    <div className="bg-white text-[#1e293b] text-[11px] font-mono select-none">
+      {/* Barra de título Excel */}
+      <div className="bg-[#1d6a38] px-3 py-1.5 flex items-center gap-2">
+        <div className="flex gap-1">
+          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+          <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+        </div>
+        <span className="text-[10px] text-white/80 font-sans">controle_qualidade_mai2025.xlsx</span>
+      </div>
+
+      {/* Ribbon simplificado */}
+      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4">
+        {['Arquivo', 'Página Inicial', 'Inserir', 'Dados'].map(m => (
+          <span key={m} className="text-[10px] font-sans text-gray-500">{m}</span>
+        ))}
+      </div>
+
+      {/* Barra de fórmula */}
+      <div className="bg-white border-b border-gray-200 px-3 py-1 flex items-center gap-2">
+        <span className="text-[10px] text-gray-400 font-sans w-6">G3</span>
+        <div className="w-px h-3 bg-gray-300" />
+        <span className="text-[10px] text-gray-500 font-sans">=SE(F3="ok","aprovado","reprovado")</span>
+      </div>
+
+      {/* Tabela */}
+      <div className="overflow-x-auto">
+        <table className="border-collapse w-full">
+          <thead>
+            {/* Números das colunas (A B C...) */}
+            <tr className="bg-[#f3f4f6]">
+              <th className="border border-gray-300 w-6 text-[9px] text-gray-400 font-normal px-1" />
+              {cols.map((_, i) => (
+                <th key={i} className="border border-gray-300 text-[9px] text-gray-400 font-normal px-2 py-0.5">
+                  {String.fromCharCode(65 + i)}
+                </th>
+              ))}
+              <th className="border border-gray-300 text-[9px] text-gray-400 font-normal px-2 py-0.5 opacity-40">I</th>
+            </tr>
+            {/* Cabeçalho das colunas */}
+            <tr className="bg-[#e2e8f0]">
+              <td className="border border-gray-300 text-[9px] text-gray-400 text-center px-1">1</td>
+              {cols.map(col => (
+                <td key={col} className="border border-gray-300 font-sans font-semibold text-[10px] text-gray-700 px-2 py-1 whitespace-nowrap">
+                  {col}
+                </td>
+              ))}
+              <td className="border border-gray-300 px-2 text-gray-300 text-[9px]">…</td>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, r) => (
+              <tr key={r} className={r % 2 === 0 ? 'bg-white' : 'bg-[#f9fafb]'}>
+                <td className="border border-gray-200 text-[9px] text-gray-400 text-center px-1 bg-[#f3f4f6]">{r + 2}</td>
+                {row.map((cell, c) => (
+                  <td
+                    key={c}
+                    className={`border border-gray-200 px-2 py-1 whitespace-nowrap font-sans text-[10px] ${cellClass(r, c) || 'text-gray-700'}`}
+                  >
+                    {cell || <span className="text-gray-300">—</span>}
+                  </td>
+                ))}
+                <td className="border border-gray-200 px-2 text-gray-200 text-[9px]">…</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Rodapé */}
+      <div className="bg-[#f3f4f6] border-t border-gray-300 px-3 py-1 flex items-center justify-between">
+        <div className="flex gap-0">
+          {['Mai', 'Abr', 'Mar', 'Fev'].map(m => (
+            <span key={m} className={`text-[9px] font-sans px-2 py-0.5 border border-gray-300 ${m === 'Mai' ? 'bg-white text-[#1d6a38] font-medium' : 'bg-[#e2e8f0] text-gray-400'}`}>{m}</span>
+          ))}
+        </div>
+        <span className="text-[9px] font-sans text-gray-400">Planilha1 de 4</span>
+      </div>
+    </div>
   )
 }
 
