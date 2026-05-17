@@ -300,13 +300,13 @@ function MockupLista() {
   return (
     <div>
       <div className="flex items-center justify-between px-5 py-3 border-b border-white/8 bg-zinc-950">
-        <div className="flex items-center gap-2">
-          <FileText className="w-4 h-4 text-orange-500" />
-          <span className="text-sm font-medium text-zinc-200">FDS</span>
-          <span className="text-xs text-zinc-600">/ Fichas de Dados de Segurança</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <FileText className="w-4 h-4 text-orange-500 flex-shrink-0" />
+          <span className="text-sm font-medium text-zinc-200 flex-shrink-0">FDS</span>
+          <span className="text-xs text-zinc-600 hidden sm:inline truncate">/ Fichas de Dados de Segurança</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-7 px-3 rounded-md bg-white/5 border border-white/8 flex items-center gap-1.5">
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="hidden sm:flex h-7 px-3 rounded-md bg-white/5 border border-white/8 items-center gap-1.5">
             <span className="text-[11px] text-zinc-500">Buscar por nome, código…</span>
           </div>
           <div className="h-7 px-3 rounded-md bg-orange-600 flex items-center">
@@ -492,9 +492,9 @@ function MockupGeracaoIA() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2">
         {/* Accordion */}
-        <div className="border-r border-white/8 p-3 space-y-1">
+        <div className="sm:border-r border-white/8 p-3 space-y-1">
           {secoes.map((s) => (
             <div key={s.n} className={`flex items-center gap-2 px-3 py-2.5 rounded-lg ${s.origem === 'gerando' ? 'bg-orange-500/5 border border-orange-500/20' : 'hover:bg-white/[0.02]'}`}>
               <span className="text-[10px] text-zinc-700 w-4 flex-shrink-0">{s.n}</span>
@@ -513,7 +513,7 @@ function MockupGeracaoIA() {
         </div>
 
         {/* Preview geração */}
-        <div className="p-4">
+        <div className="hidden sm:block p-4">
           <div className="flex items-center gap-2 mb-3">
             <Loader2 className="w-3.5 h-3.5 text-orange-400 animate-spin" />
             <p className="text-[11px] text-orange-400">Gerando Seção 6…</p>
