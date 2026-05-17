@@ -1,5 +1,6 @@
 import { Navbar } from '../components/layout/Navbar'
 import { Hero } from '../components/sections/Hero'
+import { Sobre } from '../components/sections/Sobre'
 
 export function HomePage() {
   return (
@@ -7,10 +8,7 @@ export function HomePage() {
       <Navbar />
       <main>
         <Hero />
-
-        <section id="sobre" className="min-h-screen bg-[#f8f7f4] flex items-center justify-center">
-          <p className="text-zinc-400 text-sm">Sobre — em construção</p>
-        </section>
+        <Sobre />
 
         <section id="projetos" className="min-h-screen bg-[#f1f5f9] flex items-center justify-center">
           <p className="text-zinc-400 text-sm">Projetos — em construção</p>
