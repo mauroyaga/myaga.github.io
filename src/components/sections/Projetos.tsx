@@ -69,7 +69,7 @@ export function Projetos() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="projetos" ref={ref} className="bg-[#f1f5f9] py-24 md:py-32">
+    <section id="projetos" ref={ref} className="bg-[#0f0f0f] py-24 md:py-32">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
 
         {/* Header */}
@@ -86,7 +86,7 @@ export function Projetos() {
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-display text-3xl md:text-4xl text-[#0f172a] mb-3"
+            className="font-display text-3xl md:text-4xl text-zinc-100 mb-3"
           >
             Cada projeto nasce de um processo real.
           </motion.h2>
@@ -94,7 +94,7 @@ export function Projetos() {
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-[#475569] max-w-[520px]"
+            className="text-zinc-500 max-w-[520px]"
           >
             Cada solução foi feita para ser usada, não apenas demonstrada.
           </motion.p>
@@ -119,8 +119,8 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
       className={[
-        'group relative flex flex-col rounded-2xl bg-white border border-[#e4e4e7] overflow-hidden',
-        'transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.10)] hover:-translate-y-1',
+        'group relative flex flex-col rounded-2xl bg-[#131316] border border-white/8 overflow-hidden',
+        'transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:-translate-y-1 hover:border-white/15',
         projeto.emBreve ? 'opacity-60' : '',
       ].join(' ')}
     >
@@ -149,7 +149,7 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
           {projeto.tags.map(tag => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded-md bg-[#f1f5f9] text-[10px] font-semibold uppercase tracking-wide text-[#64748b]"
+              className="px-2 py-0.5 rounded-md bg-white/5 text-[10px] font-semibold uppercase tracking-wide text-zinc-500"
             >
               {tag}
             </span>
@@ -157,12 +157,12 @@ function CardProjeto({ projeto, index, inView }: { projeto: Projeto; index: numb
         </div>
 
         {/* Nome */}
-        <h3 className="font-display text-xl text-[#0f172a] leading-snug">
+        <h3 className="font-display text-xl text-zinc-100 leading-snug">
           {projeto.nome}
         </h3>
 
         {/* Descrição */}
-        <p className="text-sm text-[#64748b] leading-relaxed flex-1 line-clamp-3">
+        <p className="text-sm text-zinc-400 leading-relaxed flex-1 line-clamp-3">
           {projeto.descricao}
         </p>
 

@@ -7,7 +7,7 @@ export function Sobre() {
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section id="sobre" ref={ref} className="bg-[#f8f7f4] py-24 md:py-32">
+    <section id="sobre" ref={ref} className="bg-[#131318] py-24 md:py-32">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="grid grid-cols-12 gap-8 items-center">
 
@@ -26,7 +26,7 @@ export function Sobre() {
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-display text-3xl md:text-4xl text-[#0f172a] leading-tight mb-6"
+              className="font-display text-3xl md:text-4xl text-zinc-100 leading-tight mb-6"
             >
               Da bancada ao código.
             </motion.h2>
@@ -36,7 +36,7 @@ export function Sobre() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-[#475569] leading-relaxed"
+                className="text-zinc-400 leading-relaxed"
               >
                 12 anos no ramo das tintas. Da bancada à bancada — de colorista em
                 fábrica ao laboratório de análise e controle de qualidade. No meio
@@ -48,7 +48,7 @@ export function Sobre() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-[#475569] leading-relaxed"
+                className="text-zinc-400 leading-relaxed"
               >
                 Formei-me Técnico em Química e fui buscar a tecnologia não para sair
                 da química, mas para aplicá-la. Começou com planilhas substituindo
@@ -65,15 +65,10 @@ export function Sobre() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="mt-8 flex flex-wrap gap-3"
             >
-              {[
-                '12 anos em tintas',
-                '8 anos em laboratório',
-                'CRQ ativo',
-                'ADS',
-              ].map(tag => (
+              {['12 anos em tintas', '8 anos em laboratório', 'CRQ ativo', 'ADS'].map(tag => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 rounded-lg bg-white border border-[#e4e4e7] text-[12px] font-medium text-[#475569]"
+                  className="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-[12px] font-medium text-zinc-400"
                 >
                   {tag}
                 </span>
@@ -99,35 +94,27 @@ export function Sobre() {
 
 function SobreIllustration() {
   return (
-    <div className="w-full max-w-[340px] aspect-square rounded-2xl bg-[#e4e4e7]/40 flex items-center justify-center relative overflow-hidden">
-      {/* Placeholder — substituir por ilustração flat */}
+    <div className="w-full max-w-[340px] aspect-square rounded-2xl bg-white/5 border border-white/8 flex items-center justify-center relative overflow-hidden">
       <div className="flex flex-col items-center gap-3 text-center px-8">
         <div className="flex items-center gap-4">
-          {/* Ícone bancada */}
           <div className="w-12 h-12 rounded-xl bg-[#e07a5f]/20 flex items-center justify-center">
             <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 stroke-[#e07a5f]" strokeWidth="1.8">
               <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
             </svg>
           </div>
-          {/* Seta */}
           <div className="w-8 h-0.5 bg-[#60a5fa]/40 relative">
             <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-t-2 border-[#60a5fa]/40 rotate-45" />
           </div>
-          {/* Ícone código */}
-          <div className="w-12 h-12 rounded-xl bg-[#6366f1]/15 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-[#6366f1]/20 flex items-center justify-center">
             <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 stroke-[#6366f1]" strokeWidth="1.8">
-              <path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 9l-3 3 3 3M16 9l3 3-3 3M12 5l-2 14" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </div>
-        <p className="text-[11px] text-[#94a3b8] tracking-wide">
-          Química + Tecnologia
-        </p>
+        <p className="text-[11px] text-zinc-600 tracking-wide">Química + Tecnologia</p>
       </div>
-
-      {/* Decorativo */}
-      <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-[#60a5fa]/8" />
-      <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-[#6366f1]/8" />
+      <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full bg-[#60a5fa]/5" />
+      <div className="absolute -top-4 -left-4 w-16 h-16 rounded-full bg-[#6366f1]/5" />
     </div>
   )
 }

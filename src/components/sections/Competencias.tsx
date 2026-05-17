@@ -23,7 +23,7 @@ export function Competencias() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="competencias" ref={ref} className="bg-[#f8f7f4] py-24 md:py-32">
+    <section id="competencias" ref={ref} className="bg-[#131318] py-24 md:py-32">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
 
         {/* Header */}
@@ -40,7 +40,7 @@ export function Competencias() {
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-display text-3xl md:text-4xl text-[#0f172a]"
+            className="font-display text-3xl md:text-4xl text-zinc-100"
           >
             Onde os dois mundos se encontram.
           </motion.h2>
@@ -54,13 +54,13 @@ export function Competencias() {
             initial={{ opacity: 0, x: -20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-2xl bg-white border border-[#e4e4e7] p-8"
+            className="rounded-2xl bg-[#1c1c22] border border-white/8 p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-[#34d399]/15 flex items-center justify-center">
                 <IconQuimica />
               </div>
-              <h3 className="font-semibold text-[#0f172a]">Química & Laboratório</h3>
+              <h3 className="font-semibold text-zinc-100">Química & Laboratório</h3>
             </div>
             <ul className="space-y-3">
               {QUIMICA.map((item, i) => (
@@ -69,7 +69,7 @@ export function Competencias() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.07 }}
-                  className="flex items-start gap-3 text-sm text-[#475569]"
+                  className="flex items-start gap-3 text-sm text-zinc-400"
                 >
                   <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60a5fa] flex-shrink-0" />
                   {item}
@@ -83,13 +83,13 @@ export function Competencias() {
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-2xl bg-white border border-[#e4e4e7] p-8"
+            className="rounded-2xl bg-[#1c1c22] border border-white/8 p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-[#6366f1]/15 flex items-center justify-center">
                 <IconTech />
               </div>
-              <h3 className="font-semibold text-[#0f172a]">Tecnologia & Desenvolvimento</h3>
+              <h3 className="font-semibold text-zinc-100">Tecnologia & Desenvolvimento</h3>
             </div>
             <ul className="space-y-3">
               {TECNOLOGIA.map((item, i) => (
@@ -98,7 +98,7 @@ export function Competencias() {
                   initial={{ opacity: 0, x: 10 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.07 }}
-                  className="flex items-start gap-3 text-sm text-[#475569]"
+                  className="flex items-start gap-3 text-sm text-zinc-400"
                 >
                   <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60a5fa] flex-shrink-0" />
                   {item}
