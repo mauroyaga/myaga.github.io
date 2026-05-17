@@ -18,8 +18,13 @@ export function Hero() {
   return (
     <section className="relative h-screen bg-[#0f0f0f] flex items-center overflow-hidden">
 
-      {/* Favo de hexágonos decorativo */}
-      <HoneycombBg />
+      {/* Favo de hexágonos original */}
+      <img
+        src="/hexagon_honeycomb.svg"
+        aria-hidden
+        draggable={false}
+        className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.07]"
+      />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12 w-full">
         <div className="grid grid-cols-12 gap-6 items-center">
@@ -171,28 +176,3 @@ function LogoHero() {
   )
 }
 
-function HoneycombBg() {
-  return (
-    <svg
-      aria-hidden
-      className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.07]"
-      viewBox="0 0 400 600"
-      fill="none"
-    >
-      {Array.from({ length: 6 }).map((_, row) =>
-        Array.from({ length: 4 }).map((_, col) => {
-          const x = col * 80 + (row % 2 === 0 ? 0 : 40)
-          const y = row * 70
-          return (
-            <polygon
-              key={`${row}-${col}`}
-              points={`${x + 40},${y} ${x + 80},${y + 20} ${x + 80},${y + 60} ${x + 40},${y + 80} ${x},${y + 60} ${x},${y + 20}`}
-              stroke="#60a5fa"
-              strokeWidth="1"
-            />
-          )
-        })
-      )}
-    </svg>
-  )
-}
