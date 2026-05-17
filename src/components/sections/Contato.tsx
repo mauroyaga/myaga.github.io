@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { MessageCircle, Mail, Github, Linkedin } from 'lucide-react'
+import { MessageCircle, Mail, Linkedin } from 'lucide-react'
 import { CONTATO } from '../../config/contato'
 
 const LINKS = [
@@ -21,15 +21,7 @@ const LINKS = [
     cor: '#60a5fa',
     bg: '#60a5fa15',
   },
-  {
-    label: 'GitHub',
-    desc: 'mauroyaga',
-    href: CONTATO.github,
-    icone: <Github className="w-5 h-5" />,
-    cor: '#a1a1aa',
-    bg: '#a1a1aa15',
-  },
-  {
+{
     label: 'LinkedIn',
     desc: 'mauroyaga',
     href: CONTATO.linkedin,
