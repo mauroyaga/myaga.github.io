@@ -54,7 +54,7 @@ export function Sobre() {
                 da química, mas para aplicá-la. Começou com planilhas substituindo
                 documentos. Escalou para aplicações com IA. Com CRQ ativo e formação
                 em ADS, hoje me posiciono onde os dois mundos se encontram — entendo
-                o laboratório por dentro e construo a ferramenta que ele precisa.
+                o laboratório e o chão de fábrica por dentro e construo a ferramenta que ele precisa.
               </motion.p>
             </div>
 
