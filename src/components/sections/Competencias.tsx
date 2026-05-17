@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 const QUIMICA = [
   'Análise e controle de qualidade',
-  'Desenvolvimento de FDS (NR-26, ABNT)',
+  'Normas técnicas e regulatórias',
   'Ensaios físico-químicos e registros técnicos',
   'Processos de fabricação de tintas',
   'CRQ ativo',
