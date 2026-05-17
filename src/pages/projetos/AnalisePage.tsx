@@ -66,7 +66,7 @@ function NarrativaAnalise() {
   const dores = [
     'Resultados registrados em planilhas que vão crescendo, tornando difícil o acesso e o comparativo de dados entre lotes',
     'Fórmulas de cálculo podem quebrar gerando margem de erros, com dificuldade para comparar dados entre registros',
-    'Sem rastreabilidade: quem aprovou, quando, com qual nota — não fica registrado de forma confiável',
+    'Difícil de rastrear — sempre necessário aplicar filtros para encontrar os registros de um produto ou lote específico',
     'Histórico de um produto exige garimpar arquivos físicos ou planilhas espalhadas entre analistas',
   ]
 
