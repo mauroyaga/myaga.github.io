@@ -9,7 +9,7 @@ export function Sobre() {
   return (
     <section id="sobre" ref={ref} className="bg-[#131318] py-24 md:py-32">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
-        <div className="grid grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-12 gap-y-8 md:gap-8 items-center">
 
           {/* Texto — 7 colunas */}
           <div className="col-span-12 md:col-span-7 order-2 md:order-1">

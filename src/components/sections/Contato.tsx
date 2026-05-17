@@ -50,7 +50,7 @@ export function Contato() {
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#6366f1]/8 blur-3xl rounded-full" aria-hidden />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12">
-        <div className="grid grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-12 gap-y-8 md:gap-8 items-center">
 
           {/* Texto — esquerda */}
           <div className="col-span-12 md:col-span-6">
