@@ -17,7 +17,7 @@ export function Metodo() {
         src="/hexagon_honeycomb.svg"
         aria-hidden
         draggable={false}
-        className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.05]"
+        className="pointer-events-none select-none absolute left-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.10] md:opacity-[0.05]"
       />
 
       {/* Glow central */}

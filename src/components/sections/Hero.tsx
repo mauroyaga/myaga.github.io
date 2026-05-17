@@ -23,7 +23,7 @@ export function Hero() {
         src="/hexagon_honeycomb.svg"
         aria-hidden
         draggable={false}
-        className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.07]"
+        className="pointer-events-none select-none absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto opacity-[0.14] md:opacity-[0.07]"
       />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-8 lg:px-12 w-full">
