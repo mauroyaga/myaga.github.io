@@ -7,7 +7,7 @@ const QUIMICA = [
   'Normas técnicas e regulatórias',
   'Ensaios físico-químicos e registros técnicos',
   'Processos de fabricação de tintas',
-  'CRQ ativo',
+  'Formação Técnico em Química',
 ]
 
 const TECNOLOGIA = [
