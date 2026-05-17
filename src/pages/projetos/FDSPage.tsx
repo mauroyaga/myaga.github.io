@@ -776,7 +776,7 @@ function EcossistemaFDS() {
             Um módulo de um sistema maior.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-8">
-            O FDS Digital integra o ecossistema Alquimista — plataforma modular para a indústria química. Dados de análise laboratorial alimentam a Seção 9 automaticamente. O mesmo produto que tem FDS tem histórico de resultados e rastreabilidade completa.
+            O FDS Digital é um módulo do ecossistema Alquimista — plataforma construída para a indústria química. O mesmo produto que tem ficha de segurança faz parte de um sistema maior, que conecta documentação técnica, laboratório e processos de fabricação.
           </p>
           <Link
             to="/"
