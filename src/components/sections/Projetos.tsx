@@ -22,7 +22,7 @@ const PROJETOS: Projeto[] = [
     nome: 'FDS Digital',
     tags: ['Química', 'Conformidade', 'IA'],
     descricao:
-      'Gestão de fichas de segurança química com IA — fluxo guiado, rastreável e assistido pelo químico responsável.',
+      'Gestão de fichas de segurança química com IA: fluxo guiado, rastreável e assistido pelo químico responsável.',
     icone: <FlaskConical className="w-7 h-7" />,
     cor: '#34d399',
     corTexto: '#059669',
@@ -33,7 +33,7 @@ const PROJETOS: Projeto[] = [
     nome: 'Análise Lab',
     tags: ['Laboratório', 'Dados', 'Automação'],
     descricao:
-      'Resultados laboratoriais centralizados e em tempo real — fim das planilhas isoladas.',
+      'Resultados laboratoriais centralizados em tempo real. Fim das planilhas isoladas.',
     icone: <BarChart3 className="w-7 h-7" />,
     cor: '#60a5fa',
     corTexto: '#2563eb',
@@ -44,7 +44,7 @@ const PROJETOS: Projeto[] = [
     nome: 'Destilador',
     tags: ['ERP', 'Dashboards', 'Decisão'],
     descricao:
-      'Transforma relatórios de ERP em dashboards interativos para decisão — sem conexão direta ao banco.',
+      'Transforma relatórios de ERP em dashboards interativos para decisão, sem conexão direta ao banco.',
     icone: <LineChart className="w-7 h-7" />,
     cor: '#a78bfa',
     corTexto: '#7c3aed',
@@ -96,7 +96,7 @@ export function Projetos() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-zinc-500 max-w-[520px]"
           >
-            Cada solução foi feita a partir de demandas reais, buscando antes de tudo entender o problema.
+            Cada solução começa pelo problema, não pela tecnologia.
           </motion.p>
         </div>
 

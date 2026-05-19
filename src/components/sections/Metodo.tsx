@@ -71,8 +71,8 @@ export function Metodo() {
               É também a ideia por trás de cada solução que desenvolvo.
             </p>
             <p>
-              Analiso processos, mapeio o problema real — não o sintoma — e construo
-              soluções que melhoram a experiência de quem trabalha com elas, todos os dias.
+              Analiso processos, mapeio o problema real, não o sintoma, e construo
+              soluções que funcionam no dia a dia de quem as usa.
               A inteligência artificial entra como ferramenta, não como promessa.
             </p>
           </motion.div>

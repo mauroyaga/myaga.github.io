@@ -48,10 +48,10 @@ function HeroAnalise() {
             Análise Lab
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-[620px]">
-            Centraliza resultados de controle de qualidade em tempo real — fim das planilhas isoladas, início da rastreabilidade completa por lote.
+            Centraliza resultados de controle de qualidade em tempo real. Fim das planilhas isoladas, rastreabilidade completa por lote.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2">
-            {['Pesagem', 'Viscosidade', 'Peso Específico', 'Aprovação', 'Histórico'].map(tag => (
+            {['Análise físico-química', 'Comparativo de dados', 'Liberação com base em histórico', 'IA integrada ao lab'].map(tag => (
               <span key={tag} className="px-3 py-1 rounded-md bg-white/5 border border-white/8 text-[12px] font-medium text-zinc-400">{tag}</span>
             ))}
           </motion.div>
@@ -64,9 +64,9 @@ function HeroAnalise() {
 // ─── NARRATIVA ───────────────────────────────────────────────────────────────
 function NarrativaAnalise() {
   const dores = [
-    'Resultados registrados em planilhas que vão crescendo, tornando difícil o acesso e o comparativo de dados entre lotes',
-    'Fórmulas de cálculo podem quebrar gerando margem de erros, com dificuldade para comparar dados entre registros',
-    'Difícil de rastrear — sempre necessário aplicar filtros para encontrar os registros de um produto ou lote específico',
+    'Planilhas que crescem mês a mês: acessar e comparar dados entre lotes vira garimpo',
+    'Fórmulas de cálculo quebram sem aviso e o erro só aparece depois que o dado já foi salvo',
+    'Rastrear um produto exige filtros manuais em cada planilha, em cada mês separado',
     'Histórico de um produto exige garimpar arquivos físicos ou planilhas espalhadas entre analistas',
   ]
 
@@ -85,10 +85,10 @@ function NarrativaAnalise() {
             Cada lote precisa ser aprovado antes de sair.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-4">
-            No chão de fábrica de tintas, cada ordem de fabricação passa por análise de controle de qualidade antes de ser liberada. O analista mede pesagem total, viscosidade (copo Ford), peso específico real e compara com as especificações do produto.
+            No chão de fábrica, cada ordem de fabricação passa por análise de controle de qualidade antes de ser liberada. O analista faz a conferência de pesagem e as medições físico-químicas e compara com as especificações do produto.
           </p>
           <p className="text-zinc-400 leading-relaxed">
-            Desvios dentro da faixa geram aprovação. Desvios críticos geram reprovação ou quarentena — e o lote não sai até ser resolvido. <span className="text-zinc-200 font-medium">Esse processo acontece dezenas de vezes por dia</span>, para cada produto diferente fabricado.
+            Desvios dentro da faixa geram aprovação. Desvios críticos geram reprovação ou quarentena: o lote não sai até ser resolvido. <span className="text-zinc-200 font-medium">Esse processo acontece dezenas de vezes por dia</span>, para cada produto diferente fabricado.
           </p>
         </motion.div>
 
@@ -115,9 +115,13 @@ function NarrativaAnalise() {
           <motion.div
             initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl border border-white/8 overflow-hidden"
+            className="relative rounded-2xl border border-white/8 overflow-visible"
+            style={{ filter: 'brightness(0.75)' }}
           >
-            <PlanilhaExcel />
+            <div className="rounded-2xl overflow-hidden">
+              <PlanilhaExcel />
+            </div>
+            <X className="absolute -top-4 -right-4 w-10 h-10 text-red-500" strokeWidth={4} />
           </motion.div>
         </div>
       </div>
@@ -129,36 +133,60 @@ function NarrativaAnalise() {
 function PlanilhaExcel() {
   const cols = ['Data', 'O.F.', 'Produto', 'PE Real', 'Viscosid.', 'Aprovado?', 'Analista', 'Obs.']
   const rows = [
-    ['12/05', '1234-56721', 'Tinta Acrilica Prem', '1.412', '128s', 'OK', 'Mauro', ''],
-    ['12/05', '1234-56722', 'tinta acrilica prem', '1,41', '—', 'ok', 'M.Y.', 'verificar'],
-    ['13/05', '1234-56730', 'T. Acrílica Premium', '', '131 seg', 'SIM', 'Mauro Y', 'refazer pe'],
-    ['13/05', '1234-56731', 'Solvente X15', '0.998', '45s', 'aprovado', '', ''],
-    ['14/05', '1234-56740', 'SOLVENTE X15', '0,997', '44', 'Aprovado!', 'MY', 'ok tb'],
-    ['14/05', '1234-56741', 'Verniz PU UV', '1.180', '', '', 'Mauro', 'faltou visc'],
-    ['15/05', '', 'Primer Epóxi Ind.', '1.352', '210s', 'REPROV', 'M. Yaga', 'lote ruim'],
-    ['15/05', '1234-56755', 'primer epóxi', '1,35', '209', 'reprovado', '', ''],
+    ['01/05', '1234-56700', 'Tinta Acrilica Prem', '1.412', '128s', 'OK', 'Mauro', ''],
+    ['01/05', '1234-56701', 'tinta acrilica prem', '1,41', '—', 'ok', 'M.Y.', 'verificar'],
+    ['02/05', '1234-56708', 'T. Acrílica Premium', '', '131 seg', 'SIM', 'Mauro Y', 'refazer pe'],
+    ['02/05', '1234-56709', 'Solvente X15', '0.998', '45s', 'aprovado', '', ''],
+    ['03/05', '1234-56714', 'SOLVENTE X15', '0,997', '44', 'Aprovado!', 'MY', 'ok tb'],
+    ['03/05', '1234-56715', 'Verniz PU UV', '1.180', '', '', 'Mauro', 'faltou visc'],
+    ['05/05', '', 'Primer Epóxi Ind.', '1.352', '210s', 'REPROV', 'M. Yaga', 'lote ruim'],
+    ['05/05', '1234-56722', 'primer epóxi', '1,35', '209', 'reprovado', '', ''],
+    ['06/05', '1234-56728', 'Esmalte Sintético Br', '1,290', '95 seg', 'yes', 'Mauro', ''],
+    ['06/05', '1234-56729', 'ESMALTE SINT. BRANCO', '1.291', '96s', 'Aprovado', 'M.Y.', 'lote ok'],
+    ['07/05', '1234-56733', 'Massa Corrida PVA', '1,520', '—', 'SIM', 'Mauro Yaga', 'sem visc'],
+    ['07/05', '1234-56734', 'massa corrida', '1,51', '—', 'sim', '', 'sem visc tb'],
+    ['08/05', '1234-56740', 'Tinta Acrílica Prem.', '1,414', '127s', 'OK', 'MY', ''],
+    ['08/05', '1234-56741', 'Tinta Acrilica', '1.410', '130', 'ok', 'Mauro', ''],
+    ['09/05', '1234-56747', 'Solvente Diluente X15', '0,999', '46s', 'aprovado', 'M. Yaga', ''],
+    ['09/05', '1234-56748', 'Solv X-15', '1,002', '47s', 'Aprovado', 'MY', 'pe alto'],
+    ['12/05', '1234-56755', 'Verniz PU UV', '', '88s', 'aguard', 'Mauro Y', 'falta PE'],
+    ['12/05', '1234-56756', 'verniz pu', '1,182', '89 seg', 'Aprovado!', '', ''],
+    ['13/05', '1234-56762', 'Primer Epóxi Ind.', '1,355', '212s', 'OK', 'Mauro', ''],
+    ['13/05', '1234-56763', 'PRIMER EPÓXI', '1.354', '211', 'ok', 'M.Y.', ''],
+    ['14/05', '1234-56769', 'Tinta Acrílica Prem', '1,408', '129s', '#REF!', 'Mauro', 'fórmula quebrou'],
+    ['14/05', '1234-56770', 'T. Acrilica Premium', '1,411', '128s', 'SIM', 'MY', ''],
+    ['15/05', '', 'Esmalte Sint. Br.', '1,288', '94s', 'aprovado', 'Mauro Yaga', ''],
+    ['15/05', '1234-56778', 'esmalte branco', '1,289', '95', 'Aprovado', '', ''],
+    ['16/05', '1234-56783', 'Massa Corrida PVA', '1,518', '', 'SIM', 'M. Yaga', 'sem visc'],
+    ['16/05', '1234-56784', 'Massa Corrida', '1,52', '', 'sim', 'MY', ''],
+    ['19/05', '1234-56790', 'Tinta Acrilica Prem', '1,413', '128s', 'OK', 'Mauro', ''],
+    ['19/05', '1234-56791', 'tinta acrilica', '1,40', '135s', 'reprovado', 'M.Y.', 'visc alta'],
+    ['20/05', '1234-56797', 'Solvente X15', '0,996', '44s', 'aprovado', '', ''],
+    ['20/05', '1234-56798', 'SOLVENTE X-15', '0,994', '43', 'Aprovado!', 'Mauro Y', 'pe baixo'],
   ]
 
-  // células para destacar em vermelho (inconsistência) e amarelo (dado faltando)
   const cellClass = (r: number, c: number): string => {
-    if (c === 3 && ['', ''].includes(rows[r][c])) return 'bg-red-200/60 text-red-800'
-    if (c === 3 && r === 2) return 'bg-red-200/60 text-red-800'         // PE vazio
-    if (c === 4 && r === 5) return 'bg-red-200/60 text-red-800'         // viscosidade vazia
-    if (c === 5 && r === 6) return 'bg-amber-100/80 text-amber-800'     // REPROV
+    const cell = rows[r][c]
+    if (c === 1 && cell === '') return 'bg-red-200/60 text-red-800'
+    if (c === 3 && cell === '') return 'bg-red-200/60 text-red-800'
+    if (c === 4 && cell === '') return 'bg-red-200/60 text-red-800'
+    if (c === 4 && cell === '—') return 'bg-amber-100/80 text-amber-800'
+    if (c === 3 && cell === '#REF!') return 'bg-red-200/60 text-red-800'
+    if (c === 5 && cell === '#REF!') return 'bg-red-200/60 text-red-800'
     if (c === 5) {
-      const v = rows[r][5].toLowerCase()
+      const v = cell.toLowerCase()
       if (['ok','sim','aprovado!','aprovado','yes'].includes(v)) return 'bg-emerald-100/70 text-emerald-800'
       if (['reprovado','reprov'].includes(v)) return 'bg-red-200/60 text-red-800'
+      if (v === 'aguard') return 'bg-amber-100/80 text-amber-800'
     }
-    if (c === 6 && rows[r][6] === '') return 'bg-amber-100/80 text-amber-800'
-    if (c === 1 && rows[r][1] === '') return 'bg-red-200/60 text-red-800'
+    if (c === 6 && cell === '') return 'bg-amber-100/80 text-amber-800'
     return ''
   }
 
   return (
-    <div className="bg-white text-[#1e293b] text-[11px] font-mono select-none">
+    <div className="bg-white text-[#1e293b] text-[11px] font-mono select-none flex flex-col" style={{ maxHeight: '480px' }}>
       {/* Barra de título Excel */}
-      <div className="bg-[#1d6a38] px-3 py-1.5 flex items-center gap-2">
+      <div className="bg-[#1d6a38] px-3 py-1.5 flex items-center gap-2 flex-shrink-0">
         <div className="flex gap-1">
           <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
           <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
@@ -168,24 +196,23 @@ function PlanilhaExcel() {
       </div>
 
       {/* Ribbon simplificado */}
-      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4">
+      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4 flex-shrink-0">
         {['Arquivo', 'Página Inicial', 'Inserir', 'Dados'].map(m => (
           <span key={m} className="text-[10px] font-sans text-gray-500">{m}</span>
         ))}
       </div>
 
       {/* Barra de fórmula */}
-      <div className="bg-white border-b border-gray-200 px-3 py-1 flex items-center gap-2">
+      <div className="bg-white border-b border-gray-200 px-3 py-1 flex items-center gap-2 flex-shrink-0">
         <span className="text-[10px] text-gray-400 font-sans w-6">G3</span>
         <div className="w-px h-3 bg-gray-300" />
         <span className="text-[10px] text-gray-500 font-sans">=SE(F3="ok","aprovado","reprovado")</span>
       </div>
 
-      {/* Tabela */}
-      <div className="overflow-x-auto">
+      {/* Tabela — scrollável */}
+      <div className="overflow-auto flex-1">
         <table className="border-collapse w-full">
-          <thead>
-            {/* Números das colunas (A B C...) */}
+          <thead className="sticky top-0 z-10">
             <tr className="bg-[#f3f4f6]">
               <th className="border border-gray-300 w-6 text-[9px] text-gray-400 font-normal px-1" />
               {cols.map((_, i) => (
@@ -195,7 +222,6 @@ function PlanilhaExcel() {
               ))}
               <th className="border border-gray-300 text-[9px] text-gray-400 font-normal px-2 py-0.5 opacity-40">I</th>
             </tr>
-            {/* Cabeçalho das colunas */}
             <tr className="bg-[#e2e8f0]">
               <td className="border border-gray-300 text-[9px] text-gray-400 text-center px-1">1</td>
               {cols.map(col => (
@@ -226,7 +252,7 @@ function PlanilhaExcel() {
       </div>
 
       {/* Rodapé */}
-      <div className="bg-[#f3f4f6] border-t border-gray-300 px-3 py-1 flex items-center justify-between">
+      <div className="bg-[#f3f4f6] border-t border-gray-300 px-3 py-1 flex items-center justify-between flex-shrink-0">
         <div className="flex gap-0">
           {['Mai', 'Abr', 'Mar', 'Fev'].map(m => (
             <span key={m} className={`text-[9px] font-sans px-2 py-0.5 border border-gray-300 ${m === 'Mai' ? 'bg-white text-[#1d6a38] font-medium' : 'bg-[#e2e8f0] text-gray-400'}`}>{m}</span>
@@ -251,11 +277,11 @@ const TABS = [
 const TAB_INFO = [
   {
     titulo: 'KPIs e lotes em um lugar',
-    desc: 'A listagem exibe os indicadores do período no topo — total de análises, desvios de PE e taxa de aprovação. A tabela abaixo tem busca por O.F., produto ou código. Cada lote mostra resultado imediato: Aprovado, Reprovado ou Quarentena.',
+    desc: 'No topo ficam os KPIs do período: total de análises, desvios de PE e taxa de aprovação. A tabela abaixo tem busca por O.F., produto ou código. Cada lote mostra resultado imediato: Aprovado, Reprovado ou Quarentena.',
   },
   {
     titulo: 'O.F., lote e pesagem com cálculos automáticos',
-    desc: 'Os dados da Ordem de Fabricação identificam o produto univocamente. Na pesagem, o sistema calcula automaticamente o líquido de conferência (pesagem total − tara) e o desvio percentual em relação ao anotado — sem margem de erro manual.',
+    desc: 'Os dados da Ordem de Fabricação identificam o produto univocamente. Na pesagem, o sistema calcula o líquido de conferência (pesagem total − tara) e o desvio percentual em relação ao anotado, sem margem de erro manual.',
   },
   {
     titulo: 'Viscosidade, PE e resultado final',
@@ -263,15 +289,15 @@ const TAB_INFO = [
   },
   {
     titulo: 'Alertas que disparam sozinhos',
-    desc: 'Configure alertas por produto, cliente, código ou número de O.F. — o sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado. Não tem como esquecer: o alerta aparece antes de qualquer dado ser salvo.',
+    desc: 'Configure alertas por produto, cliente, código ou número de O.F. O sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado. O alerta aparece antes de qualquer dado ser salvo.',
   },
   {
     titulo: 'Chat com IA especializada',
-    desc: 'IA com documentação técnica própria como referência — manuais de análise, tabelas de PE por produto e normas internas. Tire dúvidas sobre comportamento físico-químico, interpretação de resultados ou procedimentos sem sair do sistema.',
+    desc: 'IA com documentação técnica própria como referência: manuais de análise, tabelas de PE por produto e normas internas. Tire dúvidas sobre comportamento físico-químico ou interpretação de resultados sem sair do sistema.',
   },
   {
     titulo: 'Dashboard: qualidade em tempo real',
-    desc: 'Visão geral por período — KPIs de total, desvios de PE, aprovação e completagem. O scatter PE Real × PE Teórico revela dispersão de processo em cada lote. Filtros por tipo (produto acabado / MP interna) e período (hoje, 7 dias, 30 dias).',
+    desc: 'Visão geral por período: KPIs de total, desvios de PE, aprovação e completagem. O scatter PE Real × PE Teórico revela dispersão de processo em cada lote. Filtros por tipo (produto acabado / MP interna) e período (hoje, 7 dias, 30 dias).',
   },
 ]
 
@@ -890,25 +916,25 @@ function DestaqueAnalise() {
     {
       icone: <Zap className="w-5 h-5" />,
       titulo: 'Cálculos automáticos',
-      desc: 'Líquido de conferência, desvio percentual e variação de PE calculados em tempo real — sem margem de erro manual.',
+      desc: 'Líquido de conferência, desvio percentual e variação de PE calculados em tempo real, sem margem de erro manual.',
       cor: '#60a5fa',
     },
     {
       icone: <History className="w-5 h-5" />,
       titulo: 'Rastreabilidade total',
-      desc: 'Quem aprovou, quando, com qual nota — imutável após concluída. Histórico completo por produto acessível a qualquer momento.',
+      desc: 'Quem aprovou, quando, com qual nota. Imutável após concluída. Histórico completo por produto acessível a qualquer momento.',
       cor: '#34d399',
     },
     {
       icone: <Bell className="w-5 h-5" />,
       titulo: 'Alertas configuráveis',
-      desc: 'Configure alertas por produto, cliente ou código — o sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado, antes de qualquer dado ser salvo.',
+      desc: 'Configure alertas por produto, cliente ou código. O sistema monitora o formulário em tempo real e exibe o aviso assim que o critério é identificado, antes de qualquer dado ser salvo.',
       cor: '#a78bfa',
     },
     {
       icone: <Sparkles className="w-5 h-5" />,
       titulo: 'Chat com IA especializada',
-      desc: 'IA com documentação técnica própria como referência — manuais internos, tabelas de PE e normas. Responde sobre comportamento físico-químico e procedimentos sem sair do sistema.',
+      desc: 'IA com documentação técnica própria como referência: manuais internos, tabelas de PE e normas. Responde sobre comportamento físico-químico e procedimentos sem sair do sistema.',
       cor: '#fbbf24',
     },
   ]
@@ -955,7 +981,7 @@ function EcossistemaAnalise() {
             Um módulo de um sistema maior.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-8">
-            O Análise Lab é um módulo do ecossistema Alquimista — plataforma construída para a indústria química. O mesmo produto que tem histórico de análises e rastreabilidade de lotes faz parte de um sistema maior, que conecta laboratório, processos e documentação técnica.
+            O Análise Lab é um módulo do ecossistema Alquimista, construído para a indústria química. Cada produto que passa por análise aqui tem seu histórico conectado ao resto do sistema: dos processos até a documentação técnica.
           </p>
           <Link
             to="/"

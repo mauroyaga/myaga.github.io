@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, Check, FileText, Zap, Database, ShieldCheck,
-  Printer, ChevronRight, ChevronLeft, Loader2,
+  Printer, ChevronRight, ChevronLeft, Loader2, X,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/layout/Navbar'
@@ -48,7 +48,7 @@ function HeroFDS() {
             FDS Digital
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-[620px]">
-            Gestão de Fichas de Dados de Segurança com fluxo guiado e inteligência artificial — em conformidade com NBR 14725:2023 e GHS Revisão 8.
+            Gestão de Fichas de Dados de Segurança com fluxo guiado e inteligência artificial, em conformidade com NBR 14725:2023 e GHS Revisão 8.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2">
             {['NBR 14725:2023', 'GHS Revisão 8', 'IA com RAG', 'Validação automática', 'Exportação PDF'].map(tag => (
@@ -85,7 +85,7 @@ function NarrativaFDS() {
             O que é uma FDS e por que ela importa.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-4">
-            A Ficha de Dados de Segurança — antiga FISPQ — é um documento legal obrigatório para qualquer produto químico comercializado no Brasil. Ela define como o produto deve ser manuseado, armazenado, transportado e descartado. É a base de treinamentos de segurança, laudos de acidente e auditorias regulatórias.
+            A Ficha de Dados de Segurança (antiga FISPQ) é um documento legal obrigatório para qualquer produto químico comercializado no Brasil. Ela define como o produto deve ser manuseado, armazenado, transportado e descartado. É a base de treinamentos de segurança, laudos de acidente e auditorias regulatórias.
           </p>
           <p className="text-zinc-400 leading-relaxed">
             Em 2023, a norma foi atualizada: a <span className="text-zinc-200 font-medium">ABNT NBR 14725:2023</span> substituiu a versão anterior e passou a ser obrigatória a partir de julho de 2025, alinhada ao GHS Revisão 8 da ONU. Empresas que não se adequaram precisam refazer todos os documentos.
@@ -115,9 +115,13 @@ function NarrativaFDS() {
           <motion.div
             initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl border border-white/8 overflow-hidden"
+            className="relative rounded-2xl border border-white/8 overflow-visible"
+            style={{ filter: 'brightness(0.75)' }}
           >
-            <WordDocFDS />
+            <div className="rounded-2xl overflow-hidden">
+              <WordDocFDS />
+            </div>
+            <X className="absolute -top-4 -right-4 w-10 h-10 text-red-500" strokeWidth={4} />
           </motion.div>
         </div>
       </div>
@@ -128,9 +132,9 @@ function NarrativaFDS() {
 // ─── WORD DOC MOCKUP ─────────────────────────────────────────────────────────
 function WordDocFDS() {
   return (
-    <div className="bg-white text-[#1e293b] text-[11px] font-sans select-none">
+    <div className="bg-white text-[#1e293b] text-[11px] font-sans select-none flex flex-col" style={{ maxHeight: '480px' }}>
       {/* Barra de título Word */}
-      <div className="bg-[#2b579a] px-3 py-1.5 flex items-center gap-2">
+      <div className="bg-[#2b579a] px-3 py-1.5 flex items-center gap-2 flex-shrink-0">
         <div className="flex gap-1">
           <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
           <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
@@ -142,7 +146,7 @@ function WordDocFDS() {
       </div>
 
       {/* Ribbon */}
-      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4">
+      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4 flex-shrink-0">
         {['Arquivo', 'Página Inicial', 'Inserir', 'Layout', 'Revisão'].map(m => (
           <span key={m} className="text-[10px] text-gray-500">{m}</span>
         ))}
@@ -150,13 +154,13 @@ function WordDocFDS() {
       </div>
 
       {/* Régua */}
-      <div className="bg-[#e9e9e9] border-b border-gray-300 h-3" />
+      <div className="bg-[#e9e9e9] border-b border-gray-300 h-3 flex-shrink-0" />
 
-      {/* Corpo do documento */}
-      <div className="bg-[#c8c8c8] px-4 py-3">
-        <div className="bg-white shadow-sm px-8 py-5 space-y-3 max-h-[340px] overflow-hidden">
+      {/* Corpo do documento — scrollável */}
+      <div className="bg-[#c8c8c8] px-4 py-3 overflow-y-auto flex-1 [&::-webkit-scrollbar-thumb]:bg-[#34d399]">
+        <div className="bg-white shadow-sm px-8 py-5 space-y-3">
 
-          {/* Título */}
+          {/* Cabeçalho do documento */}
           <div className="text-center space-y-0.5 mb-3">
             <p className="font-bold text-[13px] tracking-wide uppercase">Ficha de Dados de Segurança</p>
             <p className="text-[10px] text-gray-500">Conforme ABNT NBR 14725 — GHS Revisão 6</p>
@@ -183,6 +187,8 @@ function WordDocFDS() {
               <p><span className="text-gray-400">Nome do produto:</span> Tinta Acrílica Premium Base Água 18L</p>
               <p><span className="text-gray-400">Uso recomendado:</span> Tinta imobiliária para uso interno e externo em alvenaria</p>
               <p><span className="text-gray-400">Fabricante:</span> <span className="text-gray-800">[nome da empresa]</span> <span className="text-[#e8a838]">[preencher]</span></p>
+              <p><span className="text-gray-400">CNPJ:</span> <span className="text-[#e8a838]">[preencher]</span></p>
+              <p><span className="text-gray-400">Endereço:</span> <span className="text-[#e8a838]">[preencher]</span></p>
               <p><span className="text-gray-400">Telefone emergência:</span> 0800 000 0000 <span className="text-red-500 text-[9px]">← verificar se ainda ativo</span></p>
             </div>
           </div>
@@ -197,28 +203,197 @@ function WordDocFDS() {
               <p className="text-red-600 text-[9px] font-medium bg-red-50 px-1.5 py-0.5 rounded">
                 TODO: reclassificar conforme tabela GHS Rev. 8 — frases H e P precisam revisão
               </p>
+              <p className="text-gray-600"><span className="text-gray-400">Frase H:</span> H315, H319 <span className="text-[#e8a838] text-[9px]">[confirmar com Rev. 8]</span></p>
+              <p className="text-gray-600"><span className="text-gray-400">Frase P:</span> P264, P280, P337+P313</p>
               <p className="text-gray-500 text-[9px] italic">Pictogramas: [inserir manualmente no PDF]</p>
             </div>
           </div>
 
-          {/* Seção 3 parcial */}
-          <div className="pt-1 opacity-70">
+          {/* Seção 3 */}
+          <div className="pt-1">
             <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
               3 — Composição e Informações sobre os Ingredientes
             </p>
-            <p className="text-[10px] text-gray-400 italic">Cópiar da FDS anterior — confirmar percentuais com P&amp;D antes de enviar</p>
+            <p className="text-[10px] text-gray-400 italic mb-1">Copiar da FDS anterior — confirmar percentuais com P&amp;D antes de enviar</p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">Água:</span> 40–50% <span className="text-[#e8a838] text-[9px]">[conferir]</span></p>
+              <p><span className="text-gray-400">Dispersão acrílica:</span> 25–35%</p>
+              <p><span className="text-gray-400">Dióxido de titânio (TiO₂):</span> 10–15% — CAS 13463-67-7</p>
+              <p><span className="text-gray-400">Carbonato de cálcio:</span> 5–10% — CAS 471-34-1</p>
+              <p className="text-red-500 text-[9px]">← biocida: verificar se consta na lista REACH atualizada</p>
+            </div>
           </div>
 
-          {/* Fade out */}
-          <div className="relative h-6 pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white" />
-            <p className="absolute bottom-0 left-0 text-[9px] text-gray-300 italic">...seções 4 a 16 continuam abaixo...</p>
+          {/* Seção 4 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              4 — Medidas de Primeiros Socorros
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5 leading-relaxed">
+              <p><span className="text-gray-400">Inalação:</span> Remover para ar fresco. Se sintomas persistirem, consultar médico.</p>
+              <p><span className="text-gray-400">Contato com pele:</span> Lavar com água e sabão por 15 minutos.</p>
+              <p><span className="text-gray-400">Contato com olhos:</span> Lavar com água corrente por 15 min. <span className="text-[#e8a838]">[atualizar conforme H319]</span></p>
+              <p><span className="text-gray-400">Ingestão:</span> Não induzir vômito. Procurar atendimento médico.</p>
+            </div>
           </div>
+
+          {/* Seção 5 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              5 — Medidas de Combate a Incêndio
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">Agentes extintores:</span> Água, CO₂, espuma, pó químico seco</p>
+              <p><span className="text-gray-400">Produtos de combustão:</span> CO, CO₂ <span className="text-[#e8a838] text-[9px]">[verificar emissão de isocianatos — formulação mudou]</span></p>
+              <p><span className="text-gray-400">EPI para bombeiros:</span> Máscara autônoma + roupa de proteção completa</p>
+            </div>
+          </div>
+
+          {/* Seção 6 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              6 — Medidas para Derramamento ou Vazamento
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p>Conter o derrame com areia ou material absorvente inerte. Não despejar em redes de esgoto.</p>
+              <p className="text-[#e8a838] text-[9px]">[procedimento de descarte: copiar do doc ambiental — pendente]</p>
+            </div>
+          </div>
+
+          {/* Seção 7 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              7 — Manuseio e Armazenamento
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">Manuseio:</span> Evitar contato com olhos e pele. Usar em local ventilado.</p>
+              <p><span className="text-gray-400">Armazenamento:</span> Entre 5°C e 35°C, protegido de geadas. <span className="text-[#e8a838] text-[9px]">[temperatura mínima mudou — era 10°C]</span></p>
+              <p><span className="text-gray-400">Validade:</span> 24 meses após fabricação em embalagem fechada.</p>
+            </div>
+          </div>
+
+          {/* Seção 8 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              8 — Controles de Exposição / Proteção Individual
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">VLE-MP (TiO₂):</span> 10 mg/m³ (ACGIH) <span className="text-[#e8a838] text-[9px]">[confirmar NR-15]</span></p>
+              <p><span className="text-gray-400">Proteção respiratória:</span> <span className="text-[#e8a838]">[preencher — PFF1 ou PFF2?]</span></p>
+              <p><span className="text-gray-400">Proteção ocular:</span> Óculos de segurança com proteção lateral</p>
+              <p><span className="text-gray-400">Proteção manual:</span> Luvas de nitrila <span className="text-[#e8a838] text-[9px]">[espessura mínima: inserir]</span></p>
+            </div>
+          </div>
+
+          {/* Seção 9 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              9 — Propriedades Físicas e Químicas
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">Aspecto:</span> Líquido viscoso, branco</p>
+              <p><span className="text-gray-400">pH:</span> 8,0 – 9,5</p>
+              <p><span className="text-gray-400">Viscosidade:</span> 110–140 s (copo Ford nº 4, 25°C)</p>
+              <p><span className="text-gray-400">Peso específico:</span> 1,40 – 1,45 g/cm³ <span className="text-red-500 text-[9px]">← lotes recentes fora desta faixa</span></p>
+              <p><span className="text-gray-400">Sólidos totais:</span> <span className="text-[#e8a838]">[preencher — dado do último laudo]</span></p>
+              <p><span className="text-gray-400">Ponto de ebulição:</span> ~100°C (fase aquosa)</p>
+            </div>
+          </div>
+
+          {/* Seção 10 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              10 — Estabilidade e Reatividade
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p>Estável nas condições normais de armazenamento. Evitar congelamento.</p>
+              <p><span className="text-gray-400">Incompatibilidades:</span> Ácidos fortes, oxidantes. <span className="text-[#e8a838] text-[9px]">[adicionar: solventes clorados]</span></p>
+              <p><span className="text-gray-400">Produtos de decomposição:</span> CO, CO₂, fumaça</p>
+            </div>
+          </div>
+
+          {/* Seção 11 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              11 — Informações Toxicológicas
+            </p>
+            <div className="text-[10px] leading-relaxed space-y-0.5">
+              <p className="text-red-600 text-[9px] bg-red-50 px-1.5 py-0.5 rounded font-medium">TODO: aguardando laudo toxicológico atualizado — não enviar até receber</p>
+              <p className="text-gray-600"><span className="text-gray-400">DL50 oral (rato):</span> &gt; 5.000 mg/kg (estimado — sem ensaio formal)</p>
+              <p className="text-gray-600"><span className="text-gray-400">Irritação ocular:</span> Confirmada — GHS Eye Irrit. 2</p>
+              <p className="text-gray-500 text-[9px] italic">Carcinogenicidade TiO₂: IARC Grupo 2B (inalação pó) — relevância para tinta líquida: baixa</p>
+            </div>
+          </div>
+
+          {/* Seção 12 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              12 — Informações Ecológicas
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p className="text-gray-400 italic">Dados ecotoxicológicos não disponíveis para o produto formulado.</p>
+              <p><span className="text-[#e8a838]">[não testado — inserir dados do biocida quando disponível]</span></p>
+              <p>Não despejar em corpos d'água ou solo.</p>
+            </div>
+          </div>
+
+          {/* Seção 13 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              13 — Considerações sobre Destinação Final
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p>Resíduos: Classe II A — não-inerte (ABNT NBR 10004).</p>
+              <p>Encaminhar para co-processamento ou aterro industrial licenciado.</p>
+              <p className="text-[#e8a838] text-[9px]">[inserir código de resíduo conforme IBAMA — pendente setor ambiental]</p>
+            </div>
+          </div>
+
+          {/* Seção 14 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              14 — Informações sobre Transporte
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">ADR/IMDG:</span> Não regulamentado como mercadoria perigosa</p>
+              <p><span className="text-gray-400">ANTT (RNTRC):</span> Não sujeito à regulamentação de transporte de produtos perigosos</p>
+              <p className="text-[#e8a838] text-[9px]">[confirmar com expedição — houve mudança na embalagem de 18L para 20L]</p>
+            </div>
+          </div>
+
+          {/* Seção 15 */}
+          <div className="pt-1">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              15 — Regulamentações
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p>ABNT NBR 14725:2012 <span className="text-red-500 text-[9px]">← norma desatualizada, vigente é 2023</span></p>
+              <p>Resolução CONAMA 313/2002 — inventário de resíduos sólidos industriais</p>
+              <p>Lei 12.305/2010 — PNRS</p>
+              <p className="text-[#e8a838] text-[9px]">[verificar legislação estadual aplicável — depende do estado de destino]</p>
+            </div>
+          </div>
+
+          {/* Seção 16 */}
+          <div className="pt-1 pb-2">
+            <p className="font-bold text-[11px] uppercase tracking-wide border-b border-gray-200 pb-0.5 mb-1.5">
+              16 — Outras Informações
+            </p>
+            <div className="text-[10px] text-gray-600 space-y-0.5">
+              <p><span className="text-gray-400">Elaborado por:</span> <span className="text-[#e8a838]">[nome do responsável técnico]</span></p>
+              <p><span className="text-gray-400">Revisão anterior:</span> v02 — 08/2021</p>
+              <p><span className="text-gray-400">Revisão atual:</span> v03 — 03/2023 <span className="text-red-500 text-[9px]">← desatualizada</span></p>
+              <p className="text-red-600 text-[9px] bg-red-50 px-1.5 py-0.5 rounded font-medium mt-1">
+                TODO: revisar documento completo antes de próximo lote de exportação — prazo venceu em jan/2025
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
 
       {/* Barra de status */}
-      <div className="bg-[#2b579a] px-3 py-0.5 flex items-center justify-between">
+      <div className="bg-[#2b579a] px-3 py-0.5 flex items-center justify-between flex-shrink-0">
         <span className="text-[9px] text-white/60">Página 1 de 9</span>
         <span className="text-[9px] text-white/60">Português (Brasil)</span>
       </div>
@@ -238,23 +413,23 @@ const TABS = [
 const TAB_INFO = [
   {
     titulo: 'Todos os produtos em um lugar',
-    desc: 'Tabela paginada com busca por nome ou código. Cada FDS tem status de preenchimento — Rascunho enquanto em edição, Finalizada após validação completa. Uma FDS finalizada não pode ser regredida, garantindo rastreabilidade.',
+    desc: 'Tabela paginada com busca por nome ou código. Cada FDS tem status de preenchimento: Rascunho enquanto em edição, Finalizada após validação completa. Uma FDS finalizada não pode ser regredida, garantindo rastreabilidade.',
   },
   {
     titulo: 'Produto, empresa e fórmula',
-    desc: 'Dados da empresa vêm de configurações globais — não precisam ser redigitados. Os componentes têm número CAS, percentuais mínimo e máximo, e suporte a ingrediente sigiloso: o sistema mantém a classificação GHS mas oculta identidade do componente, conforme permite a norma.',
+    desc: 'Dados da empresa vêm de configurações globais, sem precisar redigitar. Os componentes têm número CAS, percentuais mínimo e máximo, e suporte a ingrediente sigiloso: o sistema mantém a classificação GHS mas oculta a identidade do componente, conforme permite a norma.',
   },
   {
     titulo: 'Classificação estruturada, não texto livre',
-    desc: 'A Seção 2 é preenchida de forma estruturada — pictogramas clicáveis, palavra-sinal, frases H e P selecionáveis. Isso garante que a classificação seja consistente e validável, sem erros de digitação ou inconsistências de nomenclatura.',
+    desc: 'A Seção 2 é preenchida de forma estruturada: pictogramas clicáveis, palavra-sinal, frases H e P selecionáveis. Isso garante que a classificação seja consistente e validável, sem erros de digitação ou inconsistências de nomenclatura.',
   },
   {
     titulo: 'IA gera com base no produto real',
-    desc: 'As seções 4 a 16 são geradas por IA que acessa a base de normas e FDS indexadas. O sistema gera seção a seção ou tudo de uma vez, indicando quando um dado precisa ser confirmado pelo responsável técnico — sem inventar informações.',
+    desc: 'As seções 4 a 16 são geradas por IA que acessa a base de normas e FDS indexadas. O sistema gera seção a seção ou tudo de uma vez, indicando quando um dado precisa ser confirmado pelo responsável técnico, sem inventar informações.',
   },
   {
     titulo: 'Documento pronto para uso regulatório',
-    desc: 'O preview em tempo real simula o PDF final conforme NBR 14725:2023. Template configurável — cores, margens, logo, fontes. Ao finalizar, o documento é bloqueado para edição e fica disponível para impressão ou exportação.',
+    desc: 'O preview em tempo real simula o PDF final conforme NBR 14725:2023. Template configurável: cores, margens, logo, fontes. Ao finalizar, o documento é bloqueado para edição e fica disponível para impressão ou exportação.',
   },
 ]
 
@@ -718,7 +893,7 @@ function ComoIAFunciona() {
     {
       icone: <Zap className="w-5 h-5" />,
       titulo: 'RAG recupera contexto',
-      desc: 'Para cada seção, o sistema busca os trechos mais relevantes da base — norma aplicável, produto similar, classificação de risco.',
+      desc: 'Para cada seção, o sistema busca os trechos mais relevantes da base: norma aplicável, produto similar, classificação de risco.',
       cor: '#a78bfa',
     },
     {
@@ -731,7 +906,7 @@ function ComoIAFunciona() {
     {
       icone: <ShieldCheck className="w-5 h-5" />,
       titulo: 'IA gera com precisão',
-      desc: 'A resposta é gerada com o contexto real do produto e da norma. Quando não há dado suficiente, o sistema registra "A determinar" — sem inventar.',
+      desc: 'A resposta é gerada com o contexto real do produto e da norma. Quando não há dado suficiente, o sistema registra "A determinar", sem inventar.',
       cor: '#34d399',
     },
   ]
@@ -745,7 +920,7 @@ function ComoIAFunciona() {
             IA que entende o domínio, não apenas o texto.
           </h2>
           <p className="text-zinc-500 max-w-[520px] mx-auto text-sm leading-relaxed">
-            A diferença entre uma IA genérica e uma IA útil em documentos técnicos está no contexto. O FDS Digital usa RAG — geração aumentada por recuperação — para garantir que cada resposta tenha base real.
+            A diferença entre uma IA genérica e uma IA útil em documentos técnicos está no <span className="text-[#34d399] font-medium">contexto</span>. O FDS Digital usa RAG (geração aumentada por recuperação) para garantir que cada resposta tenha base real.
           </p>
         </div>
 
@@ -782,7 +957,7 @@ function DestaquesFDS() {
     {
       icone: <Database className="w-5 h-5" />,
       titulo: 'RAG com base normativa',
-      desc: 'IA indexa normas e FDS anteriores como referência — gera com contexto real, não com dados inventados.',
+      desc: 'IA indexa normas e FDS anteriores como referência. Gera com contexto real, não com dados inventados.',
       cor: '#60a5fa',
     },
     {
@@ -794,7 +969,7 @@ function DestaquesFDS() {
     {
       icone: <Zap className="w-5 h-5" />,
       titulo: 'Coerência por IA',
-      desc: 'Após a geração, IA valida contradições entre seções — produto inflamável não pode ter seção de incêndio vazia.',
+      desc: 'Após a geração, IA valida contradições entre seções. Produto inflamável não pode ter seção de incêndio vazia.',
       cor: '#a78bfa',
     },
     {
@@ -847,7 +1022,7 @@ function EcossistemaFDS() {
             Um módulo de um sistema maior.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-8">
-            O FDS Digital é um módulo do ecossistema Alquimista — plataforma construída para a indústria química. O mesmo produto que tem ficha de segurança faz parte de um sistema maior, que conecta documentação técnica, laboratório e processos de fabricação.
+            O FDS Digital é um módulo do ecossistema Alquimista, construído para a indústria química. A mesma substância que passa por análise no Análise Lab tem sua documentação de segurança aqui. Os dados não ficam em silos.
           </p>
           <Link
             to="/"

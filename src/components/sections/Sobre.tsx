@@ -38,9 +38,9 @@ export function Sobre() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-zinc-400 leading-relaxed"
               >
-                12 anos no ramo das tintas. Da bancada à bancada — de colorista em
+                12 anos no ramo das tintas. Da bancada à bancada: de colorista em
                 fábrica ao laboratório de análise e controle de qualidade. No meio
-                do caminho, enxerguei processos que poderiam ser melhores — e decidi
+                do caminho, enxerguei processos que poderiam ser melhores e decidi
                 ser quem os melhoraria.
               </motion.p>
 
@@ -52,10 +52,10 @@ export function Sobre() {
               >
                 Formei-me Técnico em Química e fui buscar a tecnologia não para sair
                 da química, mas para aplicá-la. Começou com planilhas substituindo
-                documentos. Escalou para aplicações com IA. Com 8 anos de laboratório
-                e minha experiência profissional e formação em ADS, hoje me posiciono
-                onde os dois mundos se encontram — entendo o laboratório e o chão de
-                fábrica por dentro e construo a ferramenta que ele precisa.
+                documentos. Escalou para aplicações com IA. Com 8 anos de laboratório,
+                experiência profissional e formação em ADS, hoje me posiciono
+                onde os dois mundos se encontram: entendo o laboratório e o chão de
+                fábrica por dentro e construo a ferramenta que eles precisam.
               </motion.p>
             </div>
 

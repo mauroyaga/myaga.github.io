@@ -52,7 +52,7 @@ export function Hero() {
               custom={0.25}
               className="font-display text-4xl md:text-5xl lg:text-6xl text-zinc-100 leading-tight"
             >
-              Do chão de fábrica ao código — transformo processos em soluções digitais.
+              Do chão de fábrica ao código: transformo processos em soluções digitais.
             </motion.h1>
 
             {/* Subheadline */}
@@ -63,9 +63,9 @@ export function Hero() {
               custom={0.4}
               className="text-base md:text-lg text-zinc-400 max-w-[520px] leading-relaxed"
             >
-              Mauro Yaga — Técnico em Química e Analista de Sistemas.
+              Mauro Yaga, Técnico em Química e Analista de Sistemas.
               <br />
-              Transformo processos em soluções com IA.
+              8 anos de laboratório. Agora construo as ferramentas que o setor precisa.
             </motion.p>
 
             {/* CTA */}

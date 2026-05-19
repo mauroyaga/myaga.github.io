@@ -4,7 +4,7 @@ import {
   ArrowLeft, Upload, FileSpreadsheet,
   ChevronLeft, ChevronRight, TrendingUp,
   MessageSquare, History, Zap, Sparkles,
-  LayoutDashboard, Check, LineChart,
+  LayoutDashboard, Check, LineChart, X,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/layout/Navbar'
@@ -49,7 +49,7 @@ function HeroDestilador() {
             Destilador
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-[620px]">
-            Transforma qualquer relatório exportado do ERP em dashboards interativos e inteligência conversacional — sem conexão direta ao banco, sem planilhas manuais.
+            Transforma qualquer relatório exportado do ERP em dashboards interativos e inteligência conversacional, sem conexão direta ao banco, sem planilhas manuais.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2">
             {['Importação', 'Dashboards', 'IA Conversacional', 'Multi-ERP', 'Histórico'].map(tag => (
@@ -65,10 +65,10 @@ function HeroDestilador() {
 // ─── NARRATIVA ───────────────────────────────────────────────────────────────
 function NarrativaDestilador() {
   const dores = [
-    'Relatórios do ERP chegam como planilhas brutas — colunas com códigos internos, datas inconsistentes, sem visualização nenhuma',
+    'Relatórios do ERP chegam como planilhas brutas: colunas com códigos internos, datas inconsistentes, sem visualização nenhuma',
     'Qualquer análise exige horas de PROCV, tabelas dinâmicas e copiar/colar entre arquivos diferentes',
     'Cada mês gera um arquivo novo: sem consolidação histórica, comparar períodos vira trabalho manual',
-    'Perguntas simples — "quanto vendemos para X em abril?" — exigem abrir arquivo, filtrar, somar e conferir',
+    'Perguntas simples como "quanto vendemos para X em abril?" exigem abrir arquivo, filtrar, somar e conferir',
   ]
 
   return (
@@ -85,10 +85,10 @@ function NarrativaDestilador() {
             O ERP guarda os dados. Mas não entrega a resposta.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-4">
-            Todo ERP exporta relatórios. Vendas, compras, estoque, caixa, produção — os dados estão lá. O problema é que chegam como planilhas planas, cheias de códigos internos, colunas sem nome claro e formatos inconsistentes entre versões.
+            Todo ERP exporta relatórios. Vendas, compras, estoque, caixa, produção: os dados estão lá. O problema é que chegam como planilhas planas, cheias de códigos internos, colunas sem nome claro e formatos inconsistentes entre versões.
           </p>
           <p className="text-zinc-400 leading-relaxed">
-            Para transformar isso em decisão, alguém precisa dedicar tempo a limpeza, formatação e construção de tabelas dinâmicas — <span className="text-zinc-200 font-medium">repetindo o mesmo processo todo mês, para cada relatório diferente</span>.
+            Para transformar isso em decisão, alguém precisa dedicar tempo a limpeza, formatação e construção de tabelas dinâmicas. <span className="text-zinc-200 font-medium">O mesmo processo, todo mês, para cada relatório diferente.</span>
           </p>
         </motion.div>
 
@@ -114,9 +114,13 @@ function NarrativaDestilador() {
           <motion.div
             initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl border border-white/8 overflow-hidden"
+            className="relative rounded-2xl border border-white/8 overflow-visible"
+            style={{ filter: 'brightness(0.75)' }}
           >
-            <PlanilhaERP />
+            <div className="rounded-2xl overflow-hidden">
+              <PlanilhaERP />
+            </div>
+            <X className="absolute -top-4 -right-4 w-10 h-10 text-red-500" strokeWidth={4} />
           </motion.div>
         </div>
       </div>
@@ -136,6 +140,26 @@ function PlanilhaERP() {
     ['10/05/2025', 'DIST CENTRAL LTDA', '3423', 'PRIMER EPOXI INDL 18L', '18', '112.00', '2016,00', '30/60/90'],
     ['12/05/2025', 'DIST NORTE SA', '5519', '', '30', '87.50', '2625.00', '30 DD'],
     ['2025-05-15', 'QUIMICOS DO SUL', '1102', 'TINTA ACRILICA PREMIUM 18L', '15', '87,50', '1312.50', '30/60'],
+    ['15/05/2025', 'REVENDAS ALPHA', '2201', 'ESMALTE SINT. BRANCO 3.6L', '48', '45.00', '2160.00', '30 DD'],
+    ['2025-05-16', 'Revendas Alpha', '2201', 'ESMALTE SINTETICO BR 3,6L', '12', '45,00', '540', '30'],
+    ['19/05/2025', 'CONSTRULAR MATERIAIS', '6634', 'MASSA CORRIDA PVA 25KG', '60', '38.90', '2334.00', '28/56'],
+    ['19/05/2025', 'CONSTRULAR MAT', '6634', 'Massa Corrida PVA', '20', '38.90', '778,00', '28/56'],
+    ['20/05/2025', 'DIST CENTRAL LTDA', '3423', 'TINTA ACRILICA PREMIUM 18L', '36', '87.50', '3150.00', '30/60/90'],
+    ['2025-05-21', 'TINTAS BRASIL', '8871', 'VERNIZ PU UV 3.6L', '10', '134,00', '1340.00', '28 DD'],
+    ['22/05/2025', 'QUIMICOS DO SUL', '1102', 'SOLVENTE DILUENTE X15 5L', '24', '22.80', '547.20', '30/60'],
+    ['22/05/2025', 'QUIMICOS SUL', '1102', 'SOLV. X-15 5L', '12', '22.80', '273,60', '30/60'],
+    ['23/05/2025', 'REVENDAS ALPHA', '2201', 'PRIMER EPOXI INDL 18L', '9', '112.00', '1008.00', '30 DD'],
+    ['2025-05-24', 'DIST NORTE SA', '5519', 'TINTA ACRILICA PREMIUM 18L', '18', '87,50', '1575.00', '30 DD'],
+    ['26/05/2025', 'CONSTRULAR MATERIAIS', '6634', 'ESMALTE SINT. BRANCO 3.6L', '36', '45.00', '1620.00', '28/56'],
+    ['26/05/2025', 'CONSTRULAR', '6634', 'esmalte branco 3.6', '12', '45,00', '540,00', '28/56'],
+    ['27/05/2025', 'DIST CENTRAL LTDA', '3423', '', '48', '87.50', '4200.00', '30/60/90'],
+    ['2025-05-28', 'TINTAS BRASIL COM', '8871', 'MASSA CORRIDA PVA 25KG', '', '38.90', '0', '28 DD'],
+    ['29/05/2025', 'QUIMICOS DO SUL', '1102', 'VERNIZ PU UV 3.6L', '6', '134.00', '804.00', '30/60'],
+    ['29/05/2025', 'REVENDAS ALPHA', '2201', 'TINTA ACRILICA PREM 18L', '24', '87,50', '2100,00', '30 DD'],
+    ['30/05/2025', 'DIST NORTE SA', '5519', 'PRIMER EPÓXI INDL 18L', '15', '112.00', '1680.00', '30 DD'],
+    ['2025-05-30', 'DIST NORTE', '5519', 'Primer Epoxi 18L', '5', '112,00', '560.00', '30'],
+    ['31/05/2025', 'CONSTRULAR MATERIAIS', '6634', 'SOLVENTE DILUENTE X15 5L', '72', '22.80', '1641.60', '28/56'],
+    ['31/05/2025', 'CONSTRULAR MAT.', '6634', 'SOLV X15', '24', '22,80', '547,20', '28/56'],
   ]
 
   const cellClass = (r: number, c: number): string => {
@@ -145,13 +169,13 @@ function PlanilhaERP() {
     if (c === 5 && rows[r][5].includes(',')) return 'bg-amber-100/80 text-amber-800'
     if (c === 6 && rows[r][6] === '0') return 'bg-red-200/60 text-red-800'
     if (c === 6 && rows[r][6].includes(',')) return 'bg-amber-100/80 text-amber-800'
-    if (c === 7 && rows[r][7] === '28') return 'bg-amber-100/80 text-amber-800'
+    if (c === 7 && rows[r][7] === '28' || c === 7 && rows[r][7] === '30') return 'bg-amber-100/80 text-amber-800'
     return ''
   }
 
   return (
-    <div className="bg-white text-[#1e293b] text-[11px] font-mono select-none">
-      <div className="bg-[#217346] px-3 py-1.5 flex items-center gap-2">
+    <div className="bg-white text-[#1e293b] text-[11px] font-mono select-none flex flex-col" style={{ maxHeight: '480px' }}>
+      <div className="bg-[#217346] px-3 py-1.5 flex items-center gap-2 flex-shrink-0">
         <div className="flex gap-1">
           <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
           <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
@@ -160,21 +184,21 @@ function PlanilhaERP() {
         <span className="text-[10px] text-white/80 font-sans">RELATORIO_VENDAS_MAIO_2025_v2_FINAL.xlsx</span>
       </div>
 
-      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4">
+      <div className="bg-[#f3f4f6] border-b border-gray-300 px-3 py-1 flex items-center gap-4 flex-shrink-0">
         {['Arquivo', 'Página Inicial', 'Dados', 'Exibir'].map(m => (
           <span key={m} className="text-[10px] font-sans text-gray-500">{m}</span>
         ))}
       </div>
 
-      <div className="bg-white border-b border-gray-200 px-3 py-1 flex items-center gap-2">
+      <div className="bg-white border-b border-gray-200 px-3 py-1 flex items-center gap-2 flex-shrink-0">
         <span className="text-[10px] text-gray-400 font-sans w-6">D4</span>
         <div className="w-px h-3 bg-gray-300" />
         <span className="text-[10px] text-gray-500 font-sans">Tin. Acril. Prem. 18L</span>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-auto flex-1">
         <table className="border-collapse w-full">
-          <thead>
+          <thead className="sticky top-0 z-10">
             <tr className="bg-[#f3f4f6]">
               <th className="border border-gray-300 w-6 text-[9px] text-gray-400 font-normal px-1" />
               {cols.map((_, i) => (
@@ -213,7 +237,7 @@ function PlanilhaERP() {
         </table>
       </div>
 
-      <div className="bg-[#f3f4f6] border-t border-gray-300 px-3 py-1 flex items-center justify-between">
+      <div className="bg-[#f3f4f6] border-t border-gray-300 px-3 py-1 flex items-center justify-between flex-shrink-0">
         <div className="flex gap-0">
           {['Mai', 'Abr', 'Mar', 'Fev'].map(m => (
             <span key={m} className={`text-[9px] font-sans px-2 py-0.5 border border-gray-300 ${m === 'Mai' ? 'bg-white text-[#217346] font-medium' : 'bg-[#e2e8f0] text-gray-400'}`}>{m}</span>
@@ -237,11 +261,11 @@ const TABS = [
 const TAB_INFO = [
   {
     titulo: 'Qualquer arquivo, qualquer ERP',
-    desc: 'Upload de CSV, XLSX, TXT ou PDF exportado de qualquer ERP — sem configuração prévia. O Destilador identifica o arquivo, lê os metadados e pede apenas o nome do relatório, o grupo e o cliente para contextualizar os dados.',
+    desc: 'Upload de CSV, XLSX, TXT ou PDF exportado de qualquer ERP, sem configuração prévia. O Destilador identifica o arquivo, lê os metadados e pede apenas o nome do relatório, o grupo e o cliente para contextualizar os dados.',
   },
   {
     titulo: 'Mapeamento automático de colunas',
-    desc: 'O sistema analisa os headers do arquivo e detecta automaticamente quais colunas representam data, valor, quantidade, produto e cliente. O analista revisa e confirma — ou corrige qualquer campo — antes da importação ser concluída.',
+    desc: 'O sistema analisa os headers do arquivo e detecta automaticamente quais colunas representam data, valor, quantidade, produto e cliente. O analista revisa, confirma ou corrige qualquer campo antes da importação ser concluída.',
   },
   {
     titulo: 'Dashboard por categoria, pronto para uso',
@@ -249,7 +273,7 @@ const TAB_INFO = [
   },
   {
     titulo: 'Perguntas em linguagem natural sobre os dados',
-    desc: 'A IA Alquimista tem acesso ao contexto dos relatórios importados — pode responder perguntas sobre clientes, produtos, períodos e comparações diretamente em linguagem natural, sem exigir nenhuma fórmula ou filtro manual.',
+    desc: 'A IA Alquimista tem acesso ao contexto dos relatórios importados e responde perguntas sobre clientes, produtos, períodos e comparações em linguagem natural, sem exigir nenhuma fórmula ou filtro manual.',
   },
   {
     titulo: 'Histórico consolidado por grupo',
@@ -699,7 +723,7 @@ function DestaqueDestilador() {
     {
       icone: <Upload className="w-5 h-5" />,
       titulo: 'Importação universal',
-      desc: 'CSV, XLSX, TXT ou PDF de qualquer ERP — sem integração, sem configuração, sem precisar de acesso ao banco de dados.',
+      desc: 'CSV, XLSX, TXT ou PDF de qualquer ERP, sem integração, sem configuração, sem precisar de acesso ao banco de dados.',
       cor: '#a78bfa',
     },
     {
@@ -711,7 +735,7 @@ function DestaqueDestilador() {
     {
       icone: <MessageSquare className="w-5 h-5" />,
       titulo: 'IA conversacional',
-      desc: 'Perguntas em linguagem natural sobre os dados importados — clientes, produtos, períodos, comparações. Sem filtro manual, sem PROCV.',
+      desc: 'Perguntas em linguagem natural sobre os dados importados: clientes, produtos, períodos, comparações. Sem filtro manual, sem PROCV.',
       cor: '#34d399',
     },
     {
@@ -764,7 +788,7 @@ function EcossistemaDestilador() {
             Um módulo de um sistema maior.
           </h2>
           <p className="text-zinc-400 leading-relaxed mb-8">
-            O Destilador é um módulo do ecossistema Alquimista — plataforma construída para a indústria química. Junto com os módulos de controle de qualidade, documentação técnica e processos, forma uma base de dados e inteligência que cobre da produção à análise comercial.
+            O Destilador é um módulo do ecossistema Alquimista, construído para a indústria química. O mesmo produto que passa por controle de qualidade no Análise Lab e tem sua FDS gerida no FDS Digital aparece aqui nos relatórios comerciais. Da produção à análise, os dados estão conectados.
           </p>
           <Link
             to="/"

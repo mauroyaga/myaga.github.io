@@ -70,8 +70,7 @@ export function Contato() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-[#71717a] leading-relaxed max-w-[420px]"
             >
-              Tem um processo para simplificar, uma ideia para desenvolver
-              ou só quer trocar uma ideia? É por aqui.
+              Tem um processo para simplificar ou uma ideia para tirar do papel? É por aqui.
             </motion.p>
           </div>
 
