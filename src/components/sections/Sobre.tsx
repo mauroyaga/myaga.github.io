@@ -66,8 +66,8 @@ export function Sobre() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="mt-8 pt-6 border-t border-white/8 max-w-[620px]"
             >
-              <p className="text-zinc-100 font-semibold text-sm mb-1">Mauro Yaga</p>
-              <p className="text-zinc-500 text-[12px]">Técnico em Química · Analista e Desenvolvedor de Sistemas</p>
+              <p className="text-zinc-100 font-semibold text-sm mb-1">Mauro Cesar Yaga Junior</p>
+              <p className="text-zinc-500 text-[12px]">Técnico em Química | Analista e Desenvolvedor de Sistemas</p>
               <p className="text-zinc-600 text-[11px] mt-1 font-mono">CRQ 09407428 · 9ª Região</p>
             </motion.div>
           </div>
