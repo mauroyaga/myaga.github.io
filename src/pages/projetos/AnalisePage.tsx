@@ -50,7 +50,7 @@ function HeroAnalise() {
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-[620px]">
             Centraliza resultados de controle de qualidade em tempo real. Fim das planilhas isoladas, rastreabilidade completa por lote.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2 justify-center sm:justify-start">
             {['Análise físico-química', 'Comparativo de dados', 'Liberação com base em histórico', 'IA integrada ao lab'].map(tag => (
               <span key={tag} className="px-3 py-1 rounded-md bg-white/5 border border-white/8 text-[12px] font-medium text-zinc-400">{tag}</span>
             ))}

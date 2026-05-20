@@ -50,7 +50,7 @@ function HeroFDS() {
           <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-[620px]">
             Gestão de Fichas de Dados de Segurança com fluxo guiado e inteligência artificial, em conformidade com NBR 14725:2023 e GHS Revisão 8.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="flex flex-wrap gap-2 justify-center sm:justify-start">
             {['NBR 14725:2023', 'GHS Revisão 8', 'IA com RAG', 'Validação automática', 'Exportação PDF'].map(tag => (
               <span key={tag} className="px-3 py-1 rounded-md bg-white/5 border border-white/8 text-[12px] font-medium text-zinc-400">{tag}</span>
             ))}
@@ -801,11 +801,11 @@ function MockupPreview() {
     <div>
       {/* Toolbar preview */}
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-zinc-950">
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-zinc-500">Preview — documento finalizado</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-xs text-zinc-500 truncate">Preview — documento finalizado</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-6 px-2.5 rounded-md bg-white/5 border border-white/8 flex items-center gap-1">
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="hidden sm:flex h-6 px-2.5 rounded-md bg-white/5 border border-white/8 items-center gap-1">
             <Printer className="w-3 h-3 text-zinc-400" />
             <span className="text-[11px] text-zinc-400">Imprimir</span>
           </div>
@@ -924,7 +924,7 @@ function ComoIAFunciona() {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 max-w-[900px] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center justify-center gap-4 max-w-[900px] mx-auto">
           {etapas.map((e, i) =>
             e.arrow ? (
               <div key={i} className="hidden md:block flex-shrink-0">{e.icone}</div>
@@ -935,7 +935,7 @@ function ComoIAFunciona() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: (i / 2) * 0.15 }}
-                className="flex-1 rounded-2xl bg-[#1c1c22] border border-white/8 p-6"
+                className="w-full md:flex-1 rounded-2xl bg-[#1c1c22] border border-white/8 p-6"
               >
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${e.cor}18`, color: e.cor }}>
                   {e.icone}
