@@ -91,12 +91,12 @@ export function Sobre() {
 function SobreIllustration() {
   return (
     <div
-      className="w-full max-w-[340px] aspect-square overflow-hidden border border-white/8"
-      style={{ borderRadius: '40% 60% 20% 50% / 45% 30% 20% 55%' }}
+      className="w-full max-w-[420px] aspect-[4/3] overflow-hidden border border-white/8"
+      style={{ borderRadius: '16px' }}
     >
       <img
-        src="/imagem-portifolio-alquimista.png"
-        alt="Ilustração abstrata — química e tecnologia"
+        src="/imagem-sobre-alquimista.png"
+        alt="Foto — Mauro Yaga"
         className="w-full h-full object-cover object-center"
         draggable={false}
       />
