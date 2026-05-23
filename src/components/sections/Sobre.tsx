@@ -91,15 +91,20 @@ export function Sobre() {
 function SobreIllustration() {
   return (
     <div
-      className="w-full max-w-[420px] aspect-[4/3] overflow-hidden border border-white/8"
-      style={{ borderRadius: '16px' }}
+      className="w-full max-w-[420px] aspect-[4/3] border border-white/8"
+      style={{ borderRadius: '16px 16px 80px 16px' }}
     >
-      <img
-        src="/imagem-sobre-alquimista.png"
-        alt="Foto — Mauro Yaga"
-        className="w-full h-full object-cover object-center"
-        draggable={false}
-      />
+      <div
+        className="w-full h-full overflow-hidden"
+        style={{ borderRadius: '16px 16px 80px 16px', willChange: 'transform', transform: 'translateZ(0)' }}
+      >
+        <img
+          src="/imagem-sobre-alquimista.png"
+          alt="Foto — Mauro Yaga"
+          className="w-full h-full object-cover object-bottom"
+          draggable={false}
+        />
+      </div>
     </div>
   )
 }
