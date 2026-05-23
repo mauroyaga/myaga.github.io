@@ -8,6 +8,8 @@ import {
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/layout/Navbar'
 import { Footer } from '../../components/layout/Footer'
+import { OQueMudou } from '../../components/sections/OQueMudou'
+import { CTANavegacao } from '../../components/sections/CTANavegacao'
 
 export function AnalisePage() {
   return (
@@ -19,6 +21,36 @@ export function AnalisePage() {
         <TourAnalise />
         <DestaqueAnalise />
         <EcossistemaAnalise />
+        <OQueMudou
+          antes={[
+            'Resultados espalhados em planilhas isoladas por analista',
+            'Sem rastreabilidade por lote — histórico dependia de memória',
+            'Aprovações decididas de cabeça, sem registro formal',
+            'Retrabalho manual para gerar histórico em auditorias',
+          ]}
+          depois={[
+            'Lote identificado do início ao fim, com data e hora de liberação',
+            'Alertas automáticos disparam antes de qualquer dado ser salvo',
+            'Histórico de análises consultável a qualquer hora por produto ou O.F.',
+            'Dashboard de qualidade em tempo real com scatter PE Real × PE Teórico',
+          ]}
+        />
+        <CTANavegacao
+          outrosProjetos={[
+            {
+              nome: 'FDS Digital',
+              descricao: 'Gestão de fichas de segurança química com IA: fluxo guiado, rastreável e assistido pelo químico responsável.',
+              rota: '/projetos/fds',
+              cor: '#34d399',
+            },
+            {
+              nome: 'Destilador',
+              descricao: 'Transforma relatórios de ERP em dashboards interativos para decisão, sem conexão direta ao banco.',
+              rota: '/projetos/destilador',
+              cor: '#a78bfa',
+            },
+          ]}
+        />
       </main>
       <Footer />
     </>

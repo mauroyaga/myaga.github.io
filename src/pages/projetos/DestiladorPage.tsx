@@ -9,6 +9,8 @@ import {
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/layout/Navbar'
 import { Footer } from '../../components/layout/Footer'
+import { OQueMudou } from '../../components/sections/OQueMudou'
+import { CTANavegacao } from '../../components/sections/CTANavegacao'
 
 export function DestiladorPage() {
   return (
@@ -20,6 +22,36 @@ export function DestiladorPage() {
         <TourDestilador />
         <DestaqueDestilador />
         <EcossistemaDestilador />
+        <OQueMudou
+          antes={[
+            'Relatórios do ERP parados em arquivos, sem análise possível',
+            'Extração de dados feita manualmente em Excel a cada período',
+            'Perguntas sobre os dados respondidas fora do sistema, sem contexto',
+            'Sem visão consolidada do período — cada arquivo, uma ilha',
+          ]}
+          depois={[
+            'Upload único transforma o relatório em dashboard interativo',
+            'IA responde dúvidas com contexto real dos dados do arquivo',
+            'Histórico de conversas por arquivo — rastreável e consultável',
+            'Inteligência sobre os dados sem conexão direta ao banco de dados',
+          ]}
+        />
+        <CTANavegacao
+          outrosProjetos={[
+            {
+              nome: 'FDS Digital',
+              descricao: 'Gestão de fichas de segurança química com IA: fluxo guiado, rastreável e assistido pelo químico responsável.',
+              rota: '/projetos/fds',
+              cor: '#34d399',
+            },
+            {
+              nome: 'Análise Lab',
+              descricao: 'Resultados laboratoriais centralizados em tempo real. Fim das planilhas isoladas.',
+              rota: '/projetos/analise',
+              cor: '#60a5fa',
+            },
+          ]}
+        />
       </main>
       <Footer />
     </>

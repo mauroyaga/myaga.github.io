@@ -7,6 +7,8 @@ import {
 import { Link } from 'react-router-dom'
 import { Navbar } from '../../components/layout/Navbar'
 import { Footer } from '../../components/layout/Footer'
+import { OQueMudou } from '../../components/sections/OQueMudou'
+import { CTANavegacao } from '../../components/sections/CTANavegacao'
 
 export function FDSPage() {
   return (
@@ -19,6 +21,36 @@ export function FDSPage() {
         <ComoIAFunciona />
         <DestaquesFDS />
         <EcossistemaFDS />
+        <OQueMudou
+          antes={[
+            'FDS preenchida manualmente seção por seção, sem validação',
+            'Risco de inconsistências entre versões sem controle de alterações',
+            'IAs genéricas inventam dados toxicológicos — perigoso em documentos de segurança',
+            'Sem rastreabilidade: auditoria dependia de arquivos soltos',
+          ]}
+          depois={[
+            'Geração guiada por IA treinada nas normas NBR 14725 e GHS',
+            'Validação automática de todas as 16 seções antes de finalizar',
+            'FDS finalizada não pode ser regredida — rastreabilidade garantida',
+            'PDF pronto para uso regulatório com template configurável',
+          ]}
+        />
+        <CTANavegacao
+          outrosProjetos={[
+            {
+              nome: 'Análise Lab',
+              descricao: 'Resultados laboratoriais centralizados em tempo real. Fim das planilhas isoladas.',
+              rota: '/projetos/analise',
+              cor: '#60a5fa',
+            },
+            {
+              nome: 'Destilador',
+              descricao: 'Transforma relatórios de ERP em dashboards interativos para decisão, sem conexão direta ao banco.',
+              rota: '/projetos/destilador',
+              cor: '#a78bfa',
+            },
+          ]}
+        />
       </main>
       <Footer />
     </>
